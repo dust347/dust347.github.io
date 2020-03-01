@@ -1,6 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    <url>
+      <loc>https://dust347.github.io/categories/</loc>
+      
+      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://dust347.github.io/tags/golang/</loc>
+      
+      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://dust347.github.io/categories/golang/</loc>
+      
+      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://dust347.github.io/posts/</loc>
+      
+      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://dust347.github.io/tags/</loc>
+      
+      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      
+      
+      
+      
+    </url>
   
     <url>
       <loc>https://dust347.github.io/posts/go-douglas-algorithm/</loc>
@@ -13,59 +62,11 @@
     </url>
   
     <url>
-      <loc>https://dust347.github.io/categories/</loc>
+      <loc>https://dust347.github.io/about/</loc>
+      
+      <lastmod>2019-04-07T23:01:20+08:00</lastmod>
       
       
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/tags/golang/</loc>
-      
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/categories/golang/</loc>
-      
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/posts/</loc>
-      
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/tags/</loc>
-      
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>
@@ -73,11 +74,9 @@
     <url>
       <loc>https://dust347.github.io/</loc>
       
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
+      <lastmod>2019-04-07T23:01:20+08:00</lastmod>
       
       
-      
-      <priority>0</priority>
       
       
     </url>

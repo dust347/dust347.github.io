@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Golang on 太古汤</title>
+    <title>golang on 太古汤</title>
     <link>https://dust347.github.io/tags/golang/</link>
-    <description>Recent content in Golang on 太古汤</description>
+    <description>Recent content in golang on 太古汤</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 07 Apr 2019 23:32:28 +0800</lastBuildDate>
@@ -21,13 +21,14 @@
 一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。
 点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。
 在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。
-2.算法步骤 算法的基本思路是: - 假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
- 端点AB连接后得到的直线为AB;
- 遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
- 假设C到AB的距离为dMax，将dMax与D相比;
- 如果dMax &amp;lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
- 如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
-  3.代码实现 package Util import ( &amp;quot;math&amp;quot; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.Sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) } //计算点到另外两点所确定的直线的距离 func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 { //如果线的两个点一样，相当于计算两点之间距离 if (linePtX1 == linePtX2) &amp;amp;&amp;amp; (linePtY1 == linePtY2) { return GetDistPt(linePtX1, linePtY1, x, y) } d := (linePtY2*x-linePtY1*x + linePtX1*y-linePtX2*y + linePtX2*linePtY1-linePtX1*linePtY2) / math.</description>
+2.算法步骤 算法的基本思路是:
+  假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
+  端点AB连接后得到的直线为AB;
+  遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
+  假设C到AB的距离为dMax，将dMax与D相比;
+  如果dMax &amp;lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
+  如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
+  3.代码实现 package Util import ( &amp;#34;math&amp;#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.Sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) } //计算点到另外两点所确定的直线的距离 func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 { //如果线的两个点一样，相当于计算两点之间距离 	if (linePtX1 == linePtX2) &amp;amp;&amp;amp; (linePtY1 == linePtY2) { return GetDistPt(linePtX1, linePtY1, x, y) } d := (linePtY2*x-linePtY1*x + linePtX1*y-linePtX2*y + linePtX2*linePtY1-linePtX1*linePtY2) / math.</description>
     </item>
     
   </channel>

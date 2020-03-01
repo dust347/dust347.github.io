@@ -40,13 +40,14 @@
 一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。
 点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。
 在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。
-2.算法步骤 算法的基本思路是: - 假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
- 端点AB连接后得到的直线为AB;
- 遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
- 假设C到AB的距离为dMax，将dMax与D相比;
- 如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
- 如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
-  3.代码实现 package Util import ( &quot;math&quot; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.Sqrt((x1-x2)*(x1-x2) &#43; (y1-y2)*(y1-y2)) } //计算点到另外两点所确定的直线的距离 func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 { //如果线的两个点一样，相当于计算两点之间距离 if (linePtX1 == linePtX2) &amp;&amp; (linePtY1 == linePtY2) { return GetDistPt(linePtX1, linePtY1, x, y) } d := (linePtY2*x-linePtY1*x &#43; linePtX1*y-linePtX2*y &#43; linePtX2*linePtY1-linePtX1*linePtY2) / math."/>
+2.算法步骤 算法的基本思路是:
+  假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
+  端点AB连接后得到的直线为AB;
+  遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
+  假设C到AB的距离为dMax，将dMax与D相比;
+  如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
+  如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
+  3.代码实现 package Util import ( &#34;math&#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.Sqrt((x1-x2)*(x1-x2) &#43; (y1-y2)*(y1-y2)) } //计算点到另外两点所确定的直线的距离 func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 { //如果线的两个点一样，相当于计算两点之间距离 	if (linePtX1 == linePtX2) &amp;&amp; (linePtY1 == linePtY2) { return GetDistPt(linePtX1, linePtY1, x, y) } d := (linePtY2*x-linePtY1*x &#43; linePtX1*y-linePtX2*y &#43; linePtX2*linePtY1-linePtX1*linePtY2) / math."/>
 
   <script type="application/ld+json">
 {
@@ -55,15 +56,15 @@
   "headline": "道格拉斯算法-go语言实现",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://dust347.github.io/posts/go-douglas-algorithm/"
+    "@id": "https:\/\/dust347.github.io\/posts\/go-douglas-algorithm\/"
   },
   
   "genre": "posts",
   "keywords": "golang",
-  "wordcount": 257,
-  "url": "https://dust347.github.io/posts/go-douglas-algorithm/",
-  "datePublished": "2019-04-07T23:32:28+08:00",
-  "dateModified": "2019-04-07T23:32:28+08:00",
+  "wordcount":  256 ,
+  "url": "https:\/\/dust347.github.io\/posts\/go-douglas-algorithm\/",
+  "datePublished": "2019-04-07T23:32:28\x2b08:00",
+  "dateModified": "2019-04-07T23:32:28\x2b08:00",
   
   
   "author": {
@@ -156,130 +157,126 @@
           
           
 
-          
-
-<h1 id="1-算法概述">1.算法概述</h1>
-
+          <h1 id="1算法概述">1.算法概述</h1>
 <p>道格拉斯算法是一种曲线的点简化算法。</p>
-
 <p>一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。</p>
-
 <p>点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。</p>
-
 <p>在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。</p>
-
-<h1 id="2-算法步骤">2.算法步骤</h1>
-
-<p>算法的基本思路是:
-- 假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；</p>
-
+<h1 id="2算法步骤">2.算法步骤</h1>
+<p>算法的基本思路是:</p>
 <ul>
-<li><p>端点AB连接后得到的直线为AB;</p></li>
-
-<li><p>遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。</p></li>
-
-<li><p>假设C到AB的距离为dMax，将dMax与D相比;</p></li>
-
-<li><p>如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;</p></li>
-
-<li><p>如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。</p></li>
+<li>
+<p>假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；</p>
+</li>
+<li>
+<p>端点AB连接后得到的直线为AB;</p>
+</li>
+<li>
+<p>遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。</p>
+</li>
+<li>
+<p>假设C到AB的距离为dMax，将dMax与D相比;</p>
+</li>
+<li>
+<p>如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;</p>
+</li>
+<li>
+<p>如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。</p>
+</li>
 </ul>
+<h1 id="3代码实现">3.代码实现</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">Util</span>
 
-<h1 id="3-代码实现">3.代码实现</h1>
-
-<pre><code class="language-go">package Util
-
-import (
-	&quot;math&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;math&#34;</span>
 )
 
-/*
-* @author dust347
-* @brief
-*/
-//point
-type Point struct{
-	X float64
-	Y float64
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">* @author dust347
+</span><span style="color:#75715e">* @brief
+</span><span style="color:#75715e">*/</span>
+<span style="color:#75715e">//point
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Point</span> <span style="color:#66d9ef">struct</span>{
+	<span style="color:#a6e22e">X</span> <span style="color:#66d9ef">float64</span>
+	<span style="color:#a6e22e">Y</span> <span style="color:#66d9ef">float64</span>
 }
 
 
-//计算两点之间距离
-func GetDistPt(x1, y1 float64, x2, y2 float64) float64 {
-	return math.Sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2))
+<span style="color:#75715e">//计算两点之间距离
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDistPt</span>(<span style="color:#a6e22e">x1</span>, <span style="color:#a6e22e">y1</span> <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">x2</span>, <span style="color:#a6e22e">y2</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Sqrt</span>((<span style="color:#a6e22e">x1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">x2</span>)<span style="color:#f92672">*</span>(<span style="color:#a6e22e">x1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">x2</span>) <span style="color:#f92672">+</span> (<span style="color:#a6e22e">y1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">y2</span>)<span style="color:#f92672">*</span>(<span style="color:#a6e22e">y1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">y2</span>))
 }
 
-//计算点到另外两点所确定的直线的距离
-func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 {
-	//如果线的两个点一样，相当于计算两点之间距离
-	if (linePtX1 == linePtX2) &amp;&amp; (linePtY1 == linePtY2) {
-		return GetDistPt(linePtX1, linePtY1, x, y)
+<span style="color:#75715e">//计算点到另外两点所确定的直线的距离
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDistPt2Line</span>(<span style="color:#a6e22e">linePtX1</span>, <span style="color:#a6e22e">linePtY1</span> <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">linePtX2</span>, <span style="color:#a6e22e">linePtY2</span> <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">float64</span> {
+	<span style="color:#75715e">//如果线的两个点一样，相当于计算两点之间距离
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">linePtX1</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">linePtX2</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">linePtY1</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">linePtY2</span>) {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">GetDistPt</span>(<span style="color:#a6e22e">linePtX1</span>, <span style="color:#a6e22e">linePtY1</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>)
 	}
 
-	d := (linePtY2*x-linePtY1*x + linePtX1*y-linePtX2*y + linePtX2*linePtY1-linePtX1*linePtY2) / math.Sqrt((linePtY2-linePtY1)*(linePtY2-linePtY1)+(linePtX2-linePtX1)*(linePtX2-linePtX1))
-	return math.Abs(d)
+	<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">linePtY2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">x</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtY1</span><span style="color:#f92672">*</span><span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">linePtX1</span><span style="color:#f92672">*</span><span style="color:#a6e22e">y</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtX2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">linePtX2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">linePtY1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtX1</span><span style="color:#f92672">*</span><span style="color:#a6e22e">linePtY2</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Sqrt</span>((<span style="color:#a6e22e">linePtY2</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtY1</span>)<span style="color:#f92672">*</span>(<span style="color:#a6e22e">linePtY2</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtY1</span>)<span style="color:#f92672">+</span>(<span style="color:#a6e22e">linePtX2</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtX1</span>)<span style="color:#f92672">*</span>(<span style="color:#a6e22e">linePtX2</span><span style="color:#f92672">-</span><span style="color:#a6e22e">linePtX1</span>))
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">math</span>.<span style="color:#a6e22e">Abs</span>(<span style="color:#a6e22e">d</span>)
 }
 
-//道格拉斯抽稀算法
-func Douglas(vecPt []Point, tolerance float64) (vecPtRes []Point) {
-	l := len(vecPt)
-	if l &lt;= 2 {			//小于两个点直接返回
-		return vecPt
+<span style="color:#75715e">//道格拉斯抽稀算法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Douglas</span>(<span style="color:#a6e22e">vecPt</span> []<span style="color:#a6e22e">Point</span>, <span style="color:#a6e22e">tolerance</span> <span style="color:#66d9ef">float64</span>) (<span style="color:#a6e22e">vecPtRes</span> []<span style="color:#a6e22e">Point</span>) {
+	<span style="color:#a6e22e">l</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">vecPt</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">l</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> {			<span style="color:#75715e">//小于两个点直接返回
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">vecPt</span>
 	}
 
 
-	//用于标记哪些点需要保留
-	m := make(map[int]bool)
+	<span style="color:#75715e">//用于标记哪些点需要保留
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">bool</span>)
 
-	//两端点必保留
-	m[0] = true
-	m[l-1] = true
-	douglas(&amp;vecPt, 0, l-1, tolerance, &amp;m)
+	<span style="color:#75715e">//两端点必保留
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">m</span>[<span style="color:#ae81ff">0</span>] = <span style="color:#66d9ef">true</span>
+	<span style="color:#a6e22e">m</span>[<span style="color:#a6e22e">l</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] = <span style="color:#66d9ef">true</span>
+	<span style="color:#a6e22e">douglas</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vecPt</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">l</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">tolerance</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>)
 
-	//返回数据
-	for i, pt := range vecPt {
-		if m[i] {
-			vecPtRes = append(vecPtRes, pt)
+	<span style="color:#75715e">//返回数据
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">pt</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">vecPt</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">m</span>[<span style="color:#a6e22e">i</span>] {
+			<span style="color:#a6e22e">vecPtRes</span> = append(<span style="color:#a6e22e">vecPtRes</span>, <span style="color:#a6e22e">pt</span>)
 		}
 	}
-	return
+	<span style="color:#66d9ef">return</span>
 }
 
-func douglas(vecPt *[]Point, l, r int, tolerance float64, m *map[int]bool) {
-	if r - l &lt;= 1 {
-		return
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">douglas</span>(<span style="color:#a6e22e">vecPt</span> <span style="color:#f92672">*</span>[]<span style="color:#a6e22e">Point</span>, <span style="color:#a6e22e">l</span>, <span style="color:#a6e22e">r</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">tolerance</span> <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">bool</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">l</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span> {
+		<span style="color:#66d9ef">return</span>
 	}
 
-	//取两个端点的数据
-	x1, y1 := pt2float((*vecPt)[l])
-	x2, y2 := pt2float((*vecPt)[r])
+	<span style="color:#75715e">//取两个端点的数据
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">x1</span>, <span style="color:#a6e22e">y1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pt2float</span>((<span style="color:#f92672">*</span><span style="color:#a6e22e">vecPt</span>)[<span style="color:#a6e22e">l</span>])
+	<span style="color:#a6e22e">x2</span>, <span style="color:#a6e22e">y2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pt2float</span>((<span style="color:#f92672">*</span><span style="color:#a6e22e">vecPt</span>)[<span style="color:#a6e22e">r</span>])
 
-	var maxDist float64 = -1		//记录最大距离
-	var keepIndex int = -1			//记录要保留的点的index
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">maxDist</span> <span style="color:#66d9ef">float64</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>		<span style="color:#75715e">//记录最大距离
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">keepIndex</span> <span style="color:#66d9ef">int</span> = <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>			<span style="color:#75715e">//记录要保留的点的index
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">l</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">r</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pt2float</span>((<span style="color:#f92672">*</span><span style="color:#a6e22e">vecPt</span>)[<span style="color:#a6e22e">i</span>])
+		<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">GetDistPt2Line</span>(<span style="color:#a6e22e">x1</span>, <span style="color:#a6e22e">y1</span>, <span style="color:#a6e22e">x2</span>, <span style="color:#a6e22e">y2</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>)
 
-	for i := l+1; i &lt; r; i++ {
-		x, y := pt2float((*vecPt)[i])
-		d := GetDistPt2Line(x1, y1, x2, y2, x, y)
-
-		if d &gt; maxDist {
-			maxDist = d
-			keepIndex = i
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">d</span> &gt; <span style="color:#a6e22e">maxDist</span> {
+			<span style="color:#a6e22e">maxDist</span> = <span style="color:#a6e22e">d</span>
+			<span style="color:#a6e22e">keepIndex</span> = <span style="color:#a6e22e">i</span>
 		}
 	}
 
-	if maxDist &gt; tolerance {
-		(*m)[keepIndex] = true
-		douglas(vecPt, l, keepIndex, tolerance, m)
-		douglas(vecPt, keepIndex, r, tolerance, m)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">maxDist</span> &gt; <span style="color:#a6e22e">tolerance</span> {
+		(<span style="color:#f92672">*</span><span style="color:#a6e22e">m</span>)[<span style="color:#a6e22e">keepIndex</span>] = <span style="color:#66d9ef">true</span>
+		<span style="color:#a6e22e">douglas</span>(<span style="color:#a6e22e">vecPt</span>, <span style="color:#a6e22e">l</span>, <span style="color:#a6e22e">keepIndex</span>, <span style="color:#a6e22e">tolerance</span>, <span style="color:#a6e22e">m</span>)
+		<span style="color:#a6e22e">douglas</span>(<span style="color:#a6e22e">vecPt</span>, <span style="color:#a6e22e">keepIndex</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">tolerance</span>, <span style="color:#a6e22e">m</span>)
 	}
 }
 
-func pt2float(pt Point) (float64, float64) {
-	return pt.X, pt.Y
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">pt2float</span>(<span style="color:#a6e22e">pt</span> <span style="color:#a6e22e">Point</span>) (<span style="color:#66d9ef">float64</span>, <span style="color:#66d9ef">float64</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pt</span>.<span style="color:#a6e22e">X</span>, <span style="color:#a6e22e">pt</span>.<span style="color:#a6e22e">Y</span>
 }
 
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -292,7 +289,7 @@ func pt2float(pt Point) (float64, float64) {
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>257</span>
+                   <span>256</span>
             </p>
             
             <p class="copyright-item">
