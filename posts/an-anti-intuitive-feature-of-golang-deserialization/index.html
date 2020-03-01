@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://dust347.github.io/posts/go-douglas-algorithm/" />
+  
+  <link rel="canonical" href="https://dust347.github.io/posts/an-anti-intuitive-feature-of-golang-deserialization/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           golang json和gob包反序列化一个反直觉的特点 | 太古汤
+       
+  </title>
+  <meta name="title" content="golang json和gob包反序列化一个反直觉的特点 | 太古汤">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="golang json和gob包反序列化一个反直觉的特点"/>
+<meta name="twitter:description" content="1.概述 在使用golang对二进制反序列化的时候，会将反序列化的结果写入结构体的实例(当然必须能对应上才行)。一般来说，直觉上会认为如果要反序列话的二进制是空的(或者某些字段的值是空的)，反序列化后，对应的结构体(或对应的字段)应该是空。但是实际上，json包和gob包反序列化会用二进制对应的值去覆盖要赋值的结构体原有的值。也就是说，如果反序列化的时候，要写入的结构体的实例本身不为空，同时二进制为空的时候，反序列化并不会将这个结构体的值清空。
+2.试验代码 package main_test import ( &#34;bytes&#34; &#34;encoding/gob&#34; &#34;encoding/json&#34; &#34;testing&#34; ) //S 用来试验的结构体定义 type S struct { A int `json:&#34;a,omitempty&#34;` Str string `json:&#34;str,omitempty&#34;` B []string `json:&#34;b,omitempty&#34;` } //测试JSON反序列 func TestJSON(t *testing.T) { s1 := S{ A: 1, Str: &#34;test&#34;, B: []string{ &#34;a&#34;, &#34;b&#34;, }, } s2 := S{ A: 2, } //序列化 	raw1, err := genJSONRaw(&amp;s1) if err != nil { t.Fatal(err) } t.Logf(&#34;raw1=%s&#34;, raw1) raw2, err := genJSONRaw(&amp;s2) if err !"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "golang json和gob包反序列化一个反直觉的特点",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/dust347.github.io\/posts\/an-anti-intuitive-feature-of-golang-deserialization\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "golang",
+  "wordcount":  552 ,
+  "url": "https:\/\/dust347.github.io\/posts\/an-anti-intuitive-feature-of-golang-deserialization\/",
+  "datePublished": "2020-03-01T23:44:22\x2b08:00",
+  "dateModified": "2020-03-01T23:44:22\x2b08:00",
+  
+  
+  "author": {
+    "@type": "Person",
+    "name": "太古汤"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://dust347.github.io">太古汤</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://dust347.github.io">太古汤</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">golang json和gob包反序列化一个反直觉的特点</h1>
+        <div class="post-meta">
+            Written by <a href="https://dust347.github.io" rel="author">太古汤</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2020-03-01 >1 March 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://dust347.github.io/categories/golang/"> golang </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="1概述">1.概述</h1>
+<p>在使用golang对二进制反序列化的时候，会将反序列化的结果写入结构体的实例(当然必须能对应上才行)。一般来说，直觉上会认为如果要反序列话的二进制是空的(或者某些字段的值是空的)，反序列化后，对应的结构体(或对应的字段)应该是空。但是实际上，json包和gob包反序列化会用二进制对应的值去覆盖要赋值的结构体原有的值。也就是说，如果反序列化的时候，要写入的结构体的实例本身不为空，同时二进制为空的时候，反序列化并不会将这个结构体的值清空。</p>
+<h1 id="2试验代码">2.试验代码</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main_test</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;bytes&#34;</span>
+	<span style="color:#e6db74">&#34;encoding/gob&#34;</span>
+	<span style="color:#e6db74">&#34;encoding/json&#34;</span>
+	<span style="color:#e6db74">&#34;testing&#34;</span>
+)
+
+<span style="color:#75715e">//S 用来试验的结构体定义
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">S</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">A</span>   <span style="color:#66d9ef">int</span>      <span style="color:#e6db74">`json:&#34;a,omitempty&#34;`</span>
+	<span style="color:#a6e22e">Str</span> <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`json:&#34;str,omitempty&#34;`</span>
+	<span style="color:#a6e22e">B</span>   []<span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;b,omitempty&#34;`</span>
+}
+
+<span style="color:#75715e">//测试JSON反序列
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestJSON</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+	<span style="color:#a6e22e">s1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">1</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;a&#34;</span>,
+			<span style="color:#e6db74">&#34;b&#34;</span>,
+		},
+	}
+
+	<span style="color:#a6e22e">s2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>: <span style="color:#ae81ff">2</span>,
+	}
+
+	<span style="color:#75715e">//序列化
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">raw1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">genJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;raw1=%s&#34;</span>, <span style="color:#a6e22e">raw1</span>)
+
+	<span style="color:#a6e22e">raw2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">genJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#75715e">//部分字段有值
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;raw2=%s&#34;</span>, <span style="color:#a6e22e">raw2</span>)
+
+	<span style="color:#75715e">//反序列化
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">//当要反序列化的对象，是空的
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;s 本身为空的情况&#34;</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#a6e22e">S</span>
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw1 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">//正常反序列化
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{}
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw2 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">//raw2已有A字段有值
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;s 本身有值的情况&#34;</span>)
+
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">3</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test3&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;3&#34;</span>,
+			<span style="color:#e6db74">&#34;4&#34;</span>,
+		},
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;s=%+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw1 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">3</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test3&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;3&#34;</span>,
+			<span style="color:#e6db74">&#34;4&#34;</span>,
+		},
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;s=%+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeJSONRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw2 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">//raw2已有A字段有值
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestGob</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+	<span style="color:#a6e22e">s1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">1</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;a&#34;</span>,
+			<span style="color:#e6db74">&#34;b&#34;</span>,
+		},
+	}
+
+	<span style="color:#a6e22e">s2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>: <span style="color:#ae81ff">2</span>,
+	} <span style="color:#75715e">//empty
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">//序列化
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">raw1</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">genGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">raw2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">genGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#75715e">//反序列化
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;s 本身为空的情况&#34;</span>)
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#a6e22e">S</span>
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw1 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{}
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw2 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;s 本身不为空的情况&#34;</span>)
+
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">3</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test3&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;3&#34;</span>,
+			<span style="color:#e6db74">&#34;4&#34;</span>,
+		},
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;s=%+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw1</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw1 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">S</span>{
+		<span style="color:#a6e22e">A</span>:   <span style="color:#ae81ff">3</span>,
+		<span style="color:#a6e22e">Str</span>: <span style="color:#e6db74">&#34;test3&#34;</span>,
+		<span style="color:#a6e22e">B</span>: []<span style="color:#66d9ef">string</span>{
+			<span style="color:#e6db74">&#34;3&#34;</span>,
+			<span style="color:#e6db74">&#34;4&#34;</span>,
+		},
+	}
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;s=%+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">decodeGobRaw</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">raw2</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Logf</span>(<span style="color:#e6db74">&#34;decode raw2 to s: %+v&#34;</span>, <span style="color:#a6e22e">s</span>)
+
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">genGobRaw</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">S</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+	<span style="color:#a6e22e">enc</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gob</span>.<span style="color:#a6e22e">NewEncoder</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">buf</span>)
+
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Encode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> []<span style="color:#66d9ef">byte</span>{}, <span style="color:#a6e22e">err</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Bytes</span>(), <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">decodeGobRaw</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">S</span>, <span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">NewBuffer</span>(<span style="color:#a6e22e">b</span>)
+	<span style="color:#a6e22e">dec</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gob</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">buf</span>)
+
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">dec</span>.<span style="color:#a6e22e">Decode</span>(<span style="color:#a6e22e">s</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">genJSONRaw</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">S</span>) ([]<span style="color:#66d9ef">byte</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">s</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">decodeJSONRaw</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">S</span>, <span style="color:#a6e22e">b</span> []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">s</span>)
+}
+
+</code></pre></div><p>返回结果如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">===</span> RUN   TestJSON
+--- PASS: TestJSON <span style="color:#f92672">(</span>0.00s<span style="color:#f92672">)</span>
+    go_test.go:38: raw1<span style="color:#f92672">={</span><span style="color:#e6db74">&#34;a&#34;</span>:1,<span style="color:#e6db74">&#34;str&#34;</span>:<span style="color:#e6db74">&#34;test&#34;</span>,<span style="color:#e6db74">&#34;b&#34;</span>:<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;a&#34;</span>,<span style="color:#e6db74">&#34;b&#34;</span><span style="color:#f92672">]}</span>
+    go_test.go:45: raw2<span style="color:#f92672">={</span><span style="color:#e6db74">&#34;a&#34;</span>:2<span style="color:#f92672">}</span>
+    go_test.go:50: s 本身为空的情况
+    go_test.go:57: decode raw1 to s: <span style="color:#f92672">{</span>A:1 Str:test B:<span style="color:#f92672">[</span>a b<span style="color:#f92672">]}</span>
+    go_test.go:64: decode raw2 to s: <span style="color:#f92672">{</span>A:2 Str: B:<span style="color:#f92672">[]}</span>
+    go_test.go:66: s 本身有值的情况
+    go_test.go:77: s<span style="color:#f92672">={</span>A:3 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+    go_test.go:84: decode raw1 to s: <span style="color:#f92672">{</span>A:1 Str:test B:<span style="color:#f92672">[</span>a b<span style="color:#f92672">]}</span>
+    go_test.go:95: s<span style="color:#f92672">={</span>A:3 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+    go_test.go:101: decode raw2 to s: <span style="color:#f92672">{</span>A:2 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+<span style="color:#f92672">===</span> RUN   TestGob
+--- PASS: TestGob <span style="color:#f92672">(</span>0.00s<span style="color:#f92672">)</span>
+    go_test.go:131: s 本身为空的情况
+    go_test.go:138: decode raw1 to s: <span style="color:#f92672">{</span>A:1 Str:test B:<span style="color:#f92672">[</span>a b<span style="color:#f92672">]}</span>
+    go_test.go:145: decode raw2 to s: <span style="color:#f92672">{</span>A:2 Str: B:<span style="color:#f92672">[]}</span>
+    go_test.go:147: s 本身不为空的情况
+    go_test.go:158: s<span style="color:#f92672">={</span>A:3 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+    go_test.go:165: decode raw1 to s: <span style="color:#f92672">{</span>A:1 Str:test B:<span style="color:#f92672">[</span>a b<span style="color:#f92672">]}</span>
+    go_test.go:175: s<span style="color:#f92672">={</span>A:3 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+    go_test.go:181: decode raw2 to s: <span style="color:#f92672">{</span>A:2 Str:test3 B:<span style="color:#f92672">[</span><span style="color:#ae81ff">3</span> 4<span style="color:#f92672">]}</span>
+PASS
+ok  	test	0.400s
+</code></pre></div><p>从结果上看，反序列化的过程应该是将二进制对应的值去覆盖要写入的结构体实例对应的字段。而不会对原有的值进行清空。另外，json包反序列化的时候，如果没有指定omitempty，序列化生成的json串所有的字段都是有值的，只不过值是空。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>太古汤 </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>552</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+                
+            </p>
+
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://dust347.github.io/tags/golang/">
+                    #golang</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://dust347.github.io">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://dust347.github.io/posts/go-douglas-algorithm/" class="prev" rel="prev" title="道格拉斯算法-go语言实现"><i class="iconfont icon-dajiantou"></i>&nbsp;道格拉斯算法-go语言实现</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://dust347.github.io">太古汤</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>
