@@ -2,31 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 太古汤</title>
-    <link>https://dust347.github.io/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on 太古汤</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 01 Mar 2020 23:44:22 +0800</lastBuildDate>
     
-	<atom:link href="https://dust347.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>golang json和gob包反序列化一个反直觉的特点</title>
-      <link>https://dust347.github.io/posts/an-anti-intuitive-feature-of-golang-deserialization/</link>
+      <link>/an-anti-intuitive-feature-of-golang-deserialization/</link>
       <pubDate>Sun, 01 Mar 2020 23:44:22 +0800</pubDate>
       
-      <guid>https://dust347.github.io/posts/an-anti-intuitive-feature-of-golang-deserialization/</guid>
+      <guid>/an-anti-intuitive-feature-of-golang-deserialization/</guid>
       <description>1.概述 在使用golang对二进制反序列化的时候，会将反序列化的结果写入结构体的实例(当然必须能对应上才行)。一般来说，直觉上会认为如果要反序列话的二进制是空的(或者某些字段的值是空的)，反序列化后，对应的结构体(或对应的字段)应该是空。但是实际上，json包和gob包反序列化会用二进制对应的值去覆盖要赋值的结构体原有的值。也就是说，如果反序列化的时候，要写入的结构体的实例本身不为空，同时二进制为空的时候，反序列化并不会将这个结构体的值清空。
-2.试验代码 package main_test import ( &amp;#34;bytes&amp;#34; &amp;#34;encoding/gob&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;testing&amp;#34; ) //S 用来试验的结构体定义 type S struct { A int `json:&amp;#34;a,omitempty&amp;#34;` Str string `json:&amp;#34;str,omitempty&amp;#34;` B []string `json:&amp;#34;b,omitempty&amp;#34;` } //测试JSON反序列 func TestJSON(t *testing.T) { s1 := S{ A: 1, Str: &amp;#34;test&amp;#34;, B: []string{ &amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;, }, } s2 := S{ A: 2, } //序列化 	raw1, err := genJSONRaw(&amp;amp;s1) if err != nil { t.Fatal(err) } t.Logf(&amp;#34;raw1=%s&amp;#34;, raw1) raw2, err := genJSONRaw(&amp;amp;s2) if err !</description>
+2.试验代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216  package main_test import ( &amp;#34;bytes&amp;#34; &amp;#34;encoding/gob&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;testing&amp;#34; ) //S 用来试验的结构体定义 type S struct { A int `json:&amp;#34;a,omitempty&amp;#34;` Str string `json:&amp;#34;str,omitempty&amp;#34;` B []string `json:&amp;#34;b,omitempty&amp;#34;` } //测试JSON反序列 func TestJSON(t *testing.</description>
     </item>
     
     <item>
       <title>道格拉斯算法-go语言实现</title>
-      <link>https://dust347.github.io/posts/go-douglas-algorithm/</link>
+      <link>/go-douglas-algorithm/</link>
       <pubDate>Sun, 07 Apr 2019 23:32:28 +0800</pubDate>
       
-      <guid>https://dust347.github.io/posts/go-douglas-algorithm/</guid>
+      <guid>/go-douglas-algorithm/</guid>
       <description>1.算法概述 道格拉斯算法是一种曲线的点简化算法。
 一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。
 点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。
@@ -38,7 +39,7 @@
   假设C到AB的距离为dMax，将dMax与D相比;
   如果dMax &amp;lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
   如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
-  3.代码实现 package Util import ( &amp;#34;math&amp;#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.Sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) } //计算点到另外两点所确定的直线的距离 func GetDistPt2Line(linePtX1, linePtY1 float64, linePtX2, linePtY2 float64, x, y float64) float64 { //如果线的两个点一样，相当于计算两点之间距离 	if (linePtX1 == linePtX2) &amp;amp;&amp;amp; (linePtY1 == linePtY2) { return GetDistPt(linePtX1, linePtY1, x, y) } d := (linePtY2*x-linePtY1*x + linePtX1*y-linePtX2*y + linePtX2*linePtY1-linePtX1*linePtY2) / math.</description>
+  3.代码实现 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91  package Util import ( &amp;#34;math&amp;#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math.</description>
     </item>
     
   </channel>

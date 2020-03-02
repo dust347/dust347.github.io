@@ -1,94 +1,13 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-    <url>
-      <loc>https://dust347.github.io/categories/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/tags/golang/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/categories/golang/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/posts/an-anti-intuitive-feature-of-golang-deserialization/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/posts/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/tags/</loc>
-      
-      <lastmod>2020-03-01T23:44:22+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/posts/go-douglas-algorithm/</loc>
-      
-      <lastmod>2019-04-07T23:32:28+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/about/</loc>
-      
-      <lastmod>2019-04-07T23:01:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://dust347.github.io/</loc>
-      
-      <lastmod>2019-04-07T23:01:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-</urlset>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>/categories/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/tags/golang/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/categories/golang/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/an-anti-intuitive-feature-of-golang-deserialization/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/posts/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/tags/</loc><lastmod>2020-03-01T23:44:22&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/go-douglas-algorithm/</loc><lastmod>2019-04-07T23:32:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/about/</loc><lastmod>2019-04-07T23:01:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>/</loc><lastmod>2019-04-07T23:01:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

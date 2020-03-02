@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>道格拉斯算法-go语言实现 | 太古汤</title>
+        <meta name="Description" content="About LoveIt Theme"><meta property="og:title" content="道格拉斯算法-go语言实现" />
+<meta property="og:description" content="1.算法概述 道格拉斯算法是一种曲线的点简化算法。
+一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。
+点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。
+在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。
+2.算法步骤 算法的基本思路是:
+  假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
+  端点AB连接后得到的直线为AB;
+  遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
+  假设C到AB的距离为dMax，将dMax与D相比;
+  如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
+  如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
+  3.代码实现 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91  package Util import ( &#34;math&#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/go-douglas-algorithm/" />
+<meta property="article:published_time" content="2019-04-07T23:32:28+08:00" />
+<meta property="article:modified_time" content="2019-04-07T23:32:28+08:00" /><meta property="og:site_name" content="太古汤" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="道格拉斯算法-go语言实现"/>
+<meta name="twitter:description" content="1.算法概述 道格拉斯算法是一种曲线的点简化算法。
+一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。
+点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。
+在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。
+2.算法步骤 算法的基本思路是:
+  假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；
+  端点AB连接后得到的直线为AB;
+  遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。
+  假设C到AB的距离为dMax，将dMax与D相比;
+  如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;
+  如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。
+  3.代码实现 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91  package Util import ( &#34;math&#34; ) /* * @author dust347 * @brief */ //point type Point struct{ X float64 Y float64 } //计算两点之间距离 func GetDistPt(x1, y1 float64, x2, y2 float64) float64 { return math."/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="/go-douglas-algorithm/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="next" href="/an-anti-intuitive-feature-of-golang-deserialization/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.9a680b90260b5106d79f4075491ab31daafa7429eff686453c40b58357309649.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="><link rel="stylesheet" href="/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css" integrity="sha256-PHcOkPmOshsMBC&#43;vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><link rel="stylesheet" href="/css/style.min.5d8948958414757ef45604b42ecd0d5b536f72d8a7d7ecae64fe3f190ad0bc12.css" integrity="sha256-XYlIlYQUdX70VgS0Ls0NW1Nvctin1&#43;yuZP4/GQrQvBI=">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "道格拉斯算法-go语言实现",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/go-douglas-algorithm\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "golang","wordcount":  347 ,
+        "url": "\/go-douglas-algorithm\/","datePublished": "2019-04-07T23:32:28\x2b08:00","dateModified": "2019-04-07T23:32:28\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title animated bounceIn">
+            <a href="/">太古汤</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/">Posts</a><a class="menu-item" href="/tags/">Tags</a><a class="menu-item" href="/categories/">Categories</a><a class="menu-item" href="/about/">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+            </a>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title animated bounceIn">
+                <a href="/">太古汤</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">道格拉斯算法-go语言实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author">
+                    <a class="author" href="/" rel="author" target="_blank">
+                        <i class="fas fa-user-circle fa-fw"></i>太古汤
+                    </a>
+                </span>&nbsp;<span class="post-category">included in&nbsp;
+                            <span>
+                                <a href="/categories/golang">
+                                    <i class="far fa-folder fa-fw"></i>Golang
+                                </a>
+                            </span></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-04-07>2019-04-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 347 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>2 min&nbsp;</div>
+        </div><div class="toc" id="toc-auto">
+                <h2 class="toc-title">Contents</h2>
+                <div class="toc-content" id="toc-content-auto"></div>
+            </div>
+            <div class="toc" id="toc-static">
+                <details>
+                    <summary>
+                        <div class="toc-title">
+                            <span>Contents</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
+                    <div class="toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1算法概述">1.算法概述</a></li>
+    <li><a href="#2算法步骤">2.算法步骤</a></li>
+    <li><a href="#3代码实现">3.代码实现</a></li>
+  </ul>
+</nav></div>
+                </details>
+            </div><div class="content" id="content"><h2 id="1算法概述">1.算法概述</h2>
+<p>道格拉斯算法是一种曲线的点简化算法。</p>
+<p>一般来说，在计算机中表示一条曲线往往使用若干个点来表示，将点连接后形成的折线来趋近想要表示的曲线。点的数量越多，就越贴合想要表示的曲线。</p>
+<p>点的数量过多，就需要更多的空间去保存，同时，涉及传输或者计算，如将点的现象传输给前端或者用点生成复杂图像，往往需要更多的时间。</p>
+<p>在不影响最终绘制效果的前提下，可以将曲线中的点进行适当删除。这个步骤就是点的简化。而在对精确度要求不高的情况下，可以简化更多。</p>
+<h2 id="2算法步骤">2.算法步骤</h2>
+<p>算法的基本思路是:</p>
+<ul>
+<li>
+<p>假设要简化一条曲线，曲线的两个端点分别是A和B，容忍度为D，D为一个数值（距离），用于判断一个点是否要保留；</p>
+</li>
+<li>
+<p>端点AB连接后得到的直线为AB;</p>
+</li>
+<li>
+<p>遍历曲线上的所有点,计算所有点到AB的距离， 寻找曲线上离AB最远的点C。</p>
+</li>
+<li>
+<p>假设C到AB的距离为dMax，将dMax与D相比;</p>
+</li>
+<li>
+<p>如果dMax &lt;D,则只保留AB两点，这个时候，认为曲线是一条直线;</p>
+</li>
+<li>
+<p>如果dMax ≥D,保留对应的点C,并对AC和CB之间的曲线重复上述流程。</p>
+</li>
+</ul>
+<h2 id="3代码实现">3.代码实现</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">Util</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;math&#34;</span>
+<span class="p">)</span>
+
+<span class="cm">/*
+</span><span class="cm">* @author dust347
+</span><span class="cm">* @brief
+</span><span class="cm">*/</span>
+<span class="c1">//point
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Point</span> <span class="kd">struct</span><span class="p">{</span>
+	<span class="nx">X</span> <span class="kt">float64</span>
+	<span class="nx">Y</span> <span class="kt">float64</span>
+<span class="p">}</span>
+
+
+<span class="c1">//计算两点之间距离
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1">//计算点到另外两点所确定的直线的距离
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">linePtX2</span><span class="p">,</span> <span class="nx">linePtY2</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
+	<span class="c1">//如果线的两个点一样，相当于计算两点之间距离
+</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">linePtX1</span> <span class="o">==</span> <span class="nx">linePtX2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">linePtY1</span> <span class="o">==</span> <span class="nx">linePtY2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">d</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">linePtY2</span><span class="o">*</span><span class="nx">x</span><span class="o">-</span><span class="nx">linePtY1</span><span class="o">*</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">linePtX1</span><span class="o">*</span><span class="nx">y</span><span class="o">-</span><span class="nx">linePtX2</span><span class="o">*</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">linePtX2</span><span class="o">*</span><span class="nx">linePtY1</span><span class="o">-</span><span class="nx">linePtX1</span><span class="o">*</span><span class="nx">linePtY2</span><span class="p">)</span> <span class="o">/</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">))</span>
+	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//道格拉斯抽稀算法
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">(</span><span class="nx">vecPtRes</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="p">{</span>			<span class="c1">//小于两个点直接返回
+</span><span class="c1"></span>		<span class="k">return</span> <span class="nx">vecPt</span>
+	<span class="p">}</span>
+
+
+	<span class="c1">//用于标记哪些点需要保留
+</span><span class="c1"></span>	<span class="nx">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
+
+	<span class="c1">//两端点必保留
+</span><span class="c1"></span>	<span class="nx">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+	<span class="nx">m</span><span class="p">[</span><span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+	<span class="nf">douglas</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">vecPt</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">m</span><span class="p">)</span>
+
+	<span class="c1">//返回数据
+</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">vecPt</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">m</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">{</span>
+			<span class="nx">vecPtRes</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">vecPtRes</span><span class="p">,</span> <span class="nx">pt</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="o">*</span><span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">r</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">m</span> <span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">r</span> <span class="o">-</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="c1">//取两个端点的数据
+</span><span class="c1"></span>	<span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">l</span><span class="p">])</span>
+	<span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">r</span><span class="p">])</span>
+
+	<span class="kd">var</span> <span class="nx">maxDist</span> <span class="kt">float64</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>		<span class="c1">//记录最大距离
+</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">keepIndex</span> <span class="kt">int</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>			<span class="c1">//记录要保留的点的index
+</span><span class="c1"></span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="nx">l</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">r</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">i</span><span class="p">])</span>
+		<span class="nx">d</span> <span class="o">:=</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="nx">d</span> <span class="p">&gt;</span> <span class="nx">maxDist</span> <span class="p">{</span>
+			<span class="nx">maxDist</span> <span class="p">=</span> <span class="nx">d</span>
+			<span class="nx">keepIndex</span> <span class="p">=</span> <span class="nx">i</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nx">maxDist</span> <span class="p">&gt;</span> <span class="nx">tolerance</span> <span class="p">{</span>
+		<span class="p">(</span><span class="o">*</span><span class="nx">m</span><span class="p">)[</span><span class="nx">keepIndex</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">pt2float</span><span class="p">(</span><span class="nx">pt</span> <span class="nx">Point</span><span class="p">)</span> <span class="p">(</span><span class="kt">float64</span><span class="p">,</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">X</span><span class="p">,</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">Y</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2019-04-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/go-douglas-algorithm/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/go-douglas-algorithm/" data-title="道格拉斯算法-go语言实现"><i class="fab fa-weibo fa-fw"></i>
+</a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="/go-douglas-algorithm/" data-title="道格拉斯算法-go语言实现"><i class="fab fa-evernote fa-fw"></i>
+</a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><span>
+                        <a href="/tags/golang">
+                            <i class="fas fa-tag fa-fw"></i>golang
+                        </a>
+                    </span>&nbsp;</section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/an-anti-intuitive-feature-of-golang-deserialization/" class="next" rel="next" title="golang json和gob包反序列化一个反直觉的特点">golang json和gob包反序列化一个反直觉的特点<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">太古汤</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <span>&nbsp;</span>
+        </a><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.54590077ee163035c3dd38dc034e9f6915ecbe680dd832f449afa21672cab116.js" integrity="sha256-VFkAd&#43;4WMDXD3TjcA06faRXsvmgN2DL0Sa&#43;iFnLKsRY="></script><script src="/lib/sharer/sharer.min.9c88f86c7f0820287113f6236200459832693656e80d7556cc80a93dfbd45813.js" integrity="sha256-nIj4bH8IIChxE/YjYgBFmDJpNlboDXVWzICpPfvUWBM="></script><script src="/js/theme.min.1482fc67bfa2c3b8cebe476d0037b9321b5b7a8a1525b547b94143948be90e9e.js" integrity="sha256-FIL8Z7&#43;iw7jOvkdtADe5MhtbeooVJbVHuUFDlIvpDp4="></script></body>
+</html>
