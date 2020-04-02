@@ -7,7 +7,7 @@
 
 
 uml图大概是这个样子
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml )
+![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png)
 <!--
 ``` plantuml
  @startuml
@@ -34,7 +34,7 @@ StrategyA, StrategyB 实现了具体的算法(分别封装起来)
 以上面的类图为例，为什么必须要使用策略模式？  
 
 既然一个 StrategyContext 基本上与一个具体的 StrategyInterface 具体实现绑定，用普通的继承可以吗？比如这种：
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml )
+![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png)
 <!--
 ``` plantuml
 @startuml

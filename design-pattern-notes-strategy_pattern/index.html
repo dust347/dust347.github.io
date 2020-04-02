@@ -124,13 +124,13 @@
             </div><div class="content" id="content"><h2 id="什么是策略模式">什么是策略模式</h2>
 <p>定义了算法族，分别封装起来，让他们直接可以互相替换。让算法的变换独立于算法的客户。</p>
 <p>uml图大概是这个样子
-<figure><a class="lightgallery" href="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml" title="" data-thumbnail="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml">
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png" title="" data-thumbnail="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
             data-sizes="auto"
-            data-srcset="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml, http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml 1.5x, http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml 2x"
-            data-src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.puml"
+            data-srcset="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png 1.5x, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png 2x"
+            data-src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png"
             alt="" />
     </a></figure>
 </p>
@@ -157,13 +157,13 @@ StrategyA, StrategyB 实现了具体的算法(分别封装起来)<br>
 <h2 id="为什么使用策略模式">为什么使用策略模式</h2>
 <p>以上面的类图为例，为什么必须要使用策略模式？</p>
 <p>既然一个 StrategyContext 基本上与一个具体的 StrategyInterface 具体实现绑定，用普通的继承可以吗？比如这种：
-<figure><a class="lightgallery" href="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml" title="" data-thumbnail="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml">
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png" title="" data-thumbnail="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
             data-sizes="auto"
-            data-srcset="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml, http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml 1.5x, http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml 2x"
-            data-src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.puml"
+            data-srcset="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png 1.5x, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png 2x"
+            data-src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png"
             alt="" />
     </a></figure>
 </p>
