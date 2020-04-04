@@ -11,11 +11,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/design-pattern-notes-strategy_pattern/" />
 <meta property="article:published_time" content="2020-03-31T23:03:11+08:00" />
-<meta property="article:modified_time" content="2020-03-31T23:03:11+08:00" /><meta property="og:site_name" content="太古汤" />
+<meta property="article:modified_time" content="2020-03-31T23:03:11+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="设计模式笔记-策略模式"/>
 <meta name="twitter:description" content=""/>
-<meta name="theme-color" content="#ffffff">
+<meta name="generator" content="Hugo 0.68.3" /><meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="/design-pattern-notes-strategy_pattern/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,12 +23,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="/an-anti-intuitive-feature-of-golang-deserialization/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.9a680b90260b5106d79f4075491ab31daafa7429eff686453c40b58357309649.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="><link rel="stylesheet" href="/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css" integrity="sha256-PHcOkPmOshsMBC&#43;vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><link rel="stylesheet" href="/css/style.min.5d8948958414757ef45604b42ecd0d5b536f72d8a7d7ecae64fe3f190ad0bc12.css" integrity="sha256-XYlIlYQUdX70VgS0Ls0NW1Nvctin1&#43;yuZP4/GQrQvBI=">
-<script type="application/ld+json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="/an-anti-intuitive-feature-of-golang-deserialization/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "设计模式笔记-策略模式",
+        "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/design-pattern-notes-strategy_pattern\/"
@@ -37,8 +37,8 @@
                 "url": "\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "设计模式","wordcount":  231 ,
-        "url": "\/design-pattern-notes-strategy_pattern\/","datePublished": "2020-03-31T23:03:11\x2b08:00","dateModified": "2020-03-31T23:03:11\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "设计模式","wordcount":  194 ,
+        "url": "\/design-pattern-notes-strategy_pattern\/","datePublished": "2020-03-31","dateModified": "2020-03-31","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -47,6 +47,9 @@
                 "width":  127 ,
                 "height":  40 
                 }
+            },"author": {
+                "@type": "Person",
+                "name": "太古汤"
             },"description": ""
     }
     </script></head>
@@ -57,28 +60,27 @@
             window.isDark && document.body.classList.add('dark-theme');
         </script><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
-        <div class="header-title animated bounceIn">
+        <div class="header-title">
             <a href="/">太古汤</a>
         </div>
-        <div class="menu"><a class="menu-item" href="/posts/">Posts</a><a class="menu-item" href="/tags/">Tags</a><a class="menu-item" href="/categories/">Categories</a><a class="menu-item" href="/about/">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" rel="noopener noreffer">About</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-wrapper">
         <div class="header-container">
-            <div class="header-title animated bounceIn">
+            <div class="header-title">
                 <a href="/">太古汤</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header>
 
@@ -88,19 +90,15 @@
 </script>
 <main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animated flipInX">设计模式笔记-策略模式</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author">
-                    <a class="author" href="/" rel="author" target="_blank">
-                        <i class="fas fa-user-circle fa-fw"></i>太古汤
-                    </a>
-                </span>&nbsp;<span class="post-category">included in&nbsp;
-                            <span>
-                                <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">
-                                    <i class="far fa-folder fa-fw"></i>设计模式
-                                </a>
-                            </span></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>太古汤</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">
+                                <i class="far fa-folder fa-fw"></i>设计模式
+                            </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-31>2020-03-31</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 231 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>2 min&nbsp;</div>
+                <i class="fas fa-pencil-alt fa-fw"></i>about 194 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>1 min&nbsp;<span id="/design-pattern-notes-strategy_pattern/" class="leancloud_visitors" data-flag-title="设计模式笔记-策略模式">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
         </div><div class="toc" id="toc-auto">
                 <h2 class="toc-title">Contents</h2>
                 <div class="toc-content" id="toc-content-auto"></div>
@@ -123,17 +121,11 @@
                 </details>
             </div><div class="content" id="content"><h2 id="什么是策略模式">什么是策略模式</h2>
 <p>定义了算法族，分别封装起来，让他们直接可以互相替换。让算法的变换独立于算法的客户。</p>
-<p>uml图大概是这个样子
-<figure><a class="lightgallery" href="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png" title="" data-thumbnail="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-sizes="auto"
-            data-srcset="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png 1.5x, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png 2x"
-            data-src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png"
-            alt="" />
-    </a></figure>
-</p>
+<p>uml图大概是这个样子：</p>
+<!--
+![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png) 
+-->
+<p><img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png" width = "240" align=center /></p>
 <!--
 ``` plantuml
  @startuml
@@ -156,17 +148,11 @@ StrategyA, StrategyB 实现了具体的算法(分别封装起来)<br>
 对 StrategyContext 来说(StrategyContext 是使用 StrategyInterface这个算法族的客户)，不同的算法实现与自身独立，具体算法可以互相替换。</p>
 <h2 id="为什么使用策略模式">为什么使用策略模式</h2>
 <p>以上面的类图为例，为什么必须要使用策略模式？</p>
-<p>既然一个 StrategyContext 基本上与一个具体的 StrategyInterface 具体实现绑定，用普通的继承可以吗？比如这种：
-<figure><a class="lightgallery" href="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png" title="" data-thumbnail="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-sizes="auto"
-            data-srcset="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png 1.5x, https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png 2x"
-            data-src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png"
-            alt="" />
-    </a></figure>
-</p>
+<p>既然一个 StrategyContext 基本上与一个具体的 StrategyInterface 具体实现绑定，用普通的继承可以吗？比如这种：</p>
+<!--
+![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png)
+-->
+<p><img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png" width = "300" align=center /></p>
 <!--
 ``` plantuml
 @startuml
@@ -202,165 +188,78 @@ StrategyB <|-- StrategyContextB
 </blockquote>
 <h2 id="代码示例">代码示例</h2>
 <p>使用 go 语言实现</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">designpattern</span>
-
-<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-
-<span class="c1">//StrategyInterface 策略接口
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyInterface</span> <span class="kd">interface</span> <span class="p">{</span>
-	<span class="nf">Exe</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="c1">//StrategyA 策略实现A
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyA</span> <span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">//Exe 执行策略
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">StrategyA</span><span class="p">)</span> <span class="nf">Exe</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;exe StrategyA&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">//StrategyB 策略实现A
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyB</span> <span class="kd">struct</span><span class="p">{}</span>
-
-<span class="c1">//Exe 执行策略
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">StrategyB</span><span class="p">)</span> <span class="nf">Exe</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;exe StrategyB&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">//StrategyContent 使用策略的类
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyContent</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">s</span> <span class="nx">StrategyInterface</span>
-<span class="p">}</span>
-
-<span class="c1">//SetStrategy 设定策略
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">StrategyContent</span><span class="p">)</span> <span class="nf">SetStrategy</span><span class="p">(</span><span class="nx">s</span> <span class="nx">StrategyInterface</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nx">s</span> <span class="p">=</span> <span class="nx">s</span>
-<span class="p">}</span>
-
-<span class="c1">//Run 执行具体逻辑
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">StrategyContent</span><span class="p">)</span> <span class="nf">Run</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;begin run&#34;</span><span class="p">)</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nx">s</span><span class="p">.</span><span class="nf">Exe</span><span class="p">()</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;end run&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>测试代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">designpattern_test</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;designpattern&#34;</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;testing&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">TestStrategyPattern</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">c</span> <span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyContent</span>
-
-	<span class="nx">c</span><span class="p">.</span><span class="nf">SetStrategy</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyA</span><span class="p">))</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;===&#34;</span><span class="p">)</span>
-
-	<span class="nx">c</span><span class="p">.</span><span class="nf">SetStrategy</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyB</span><span class="p">))</span>
-	<span class="nx">c</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
-
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>运行结果：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">begin run
-exe StrategyA
-end run
-===
-begin run
-exe StrategyB
-end run
-PASS
-</code></pre></td></tr></table>
-</div>
-</div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln"> 1</span><span class="kn">package</span> <span class="nx">designpattern</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="c1">//StrategyInterface 策略接口
+</span><span class="ln"> 6</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyInterface</span> <span class="kd">interface</span> <span class="p">{</span>
+<span class="ln"> 7</span>	<span class="nf">Exe</span><span class="p">()</span>
+<span class="ln"> 8</span><span class="p">}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span><span class="c1">//StrategyA 策略实现A
+</span><span class="ln">11</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyA</span> <span class="kd">struct</span><span class="p">{}</span>
+<span class="ln">12</span>
+<span class="ln">13</span><span class="c1">//Exe 执行策略
+</span><span class="ln">14</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">StrategyA</span><span class="p">)</span> <span class="nf">Exe</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">15</span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;exe StrategyA&#34;</span><span class="p">)</span>
+<span class="ln">16</span><span class="p">}</span>
+<span class="ln">17</span>
+<span class="ln">18</span><span class="c1">//StrategyB 策略实现A
+</span><span class="ln">19</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyB</span> <span class="kd">struct</span><span class="p">{}</span>
+<span class="ln">20</span>
+<span class="ln">21</span><span class="c1">//Exe 执行策略
+</span><span class="ln">22</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">StrategyB</span><span class="p">)</span> <span class="nf">Exe</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">23</span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;exe StrategyB&#34;</span><span class="p">)</span>
+<span class="ln">24</span><span class="p">}</span>
+<span class="ln">25</span>
+<span class="ln">26</span><span class="c1">//StrategyContent 使用策略的类
+</span><span class="ln">27</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StrategyContent</span> <span class="kd">struct</span> <span class="p">{</span>
+<span class="ln">28</span>	<span class="nx">s</span> <span class="nx">StrategyInterface</span>
+<span class="ln">29</span><span class="p">}</span>
+<span class="ln">30</span>
+<span class="ln">31</span><span class="c1">//SetStrategy 设定策略
+</span><span class="ln">32</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">StrategyContent</span><span class="p">)</span> <span class="nf">SetStrategy</span><span class="p">(</span><span class="nx">s</span> <span class="nx">StrategyInterface</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">33</span>	<span class="nx">c</span><span class="p">.</span><span class="nx">s</span> <span class="p">=</span> <span class="nx">s</span>
+<span class="ln">34</span><span class="p">}</span>
+<span class="ln">35</span>
+<span class="ln">36</span><span class="c1">//Run 执行具体逻辑
+</span><span class="ln">37</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">StrategyContent</span><span class="p">)</span> <span class="nf">Run</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">38</span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;begin run&#34;</span><span class="p">)</span>
+<span class="ln">39</span>	<span class="nx">c</span><span class="p">.</span><span class="nx">s</span><span class="p">.</span><span class="nf">Exe</span><span class="p">()</span>
+<span class="ln">40</span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;end run&#34;</span><span class="p">)</span>
+<span class="ln">41</span><span class="p">}</span>
+</code></pre></div><p>测试代码如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln"> 1</span><span class="kn">package</span> <span class="nx">designpattern_test</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="p">(</span>
+<span class="ln"> 4</span>	<span class="s">&#34;designpattern&#34;</span>
+<span class="ln"> 5</span>	<span class="s">&#34;fmt&#34;</span>
+<span class="ln"> 6</span>	<span class="s">&#34;testing&#34;</span>
+<span class="ln"> 7</span><span class="p">)</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="kd">func</span> <span class="nf">TestStrategyPattern</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">10</span>	<span class="kd">var</span> <span class="nx">c</span> <span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyContent</span>
+<span class="ln">11</span>
+<span class="ln">12</span>	<span class="nx">c</span><span class="p">.</span><span class="nf">SetStrategy</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyA</span><span class="p">))</span>
+<span class="ln">13</span>	<span class="nx">c</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+<span class="ln">14</span>
+<span class="ln">15</span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;===&#34;</span><span class="p">)</span>
+<span class="ln">16</span>
+<span class="ln">17</span>	<span class="nx">c</span><span class="p">.</span><span class="nf">SetStrategy</span><span class="p">(</span><span class="nb">new</span><span class="p">(</span><span class="nx">designpattern</span><span class="p">.</span><span class="nx">StrategyB</span><span class="p">))</span>
+<span class="ln">18</span>	<span class="nx">c</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+<span class="ln">19</span>
+<span class="ln">20</span><span class="p">}</span>
+</code></pre></div><p>运行结果：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>begin run
+<span class="ln">2</span>exe StrategyA
+<span class="ln">3</span>end run
+<span class="ln">4</span>===
+<span class="ln">5</span>begin run
+<span class="ln">6</span>exe StrategyB
+<span class="ln">7</span>end run
+<span class="ln">8</span>PASS
+</code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -373,19 +272,13 @@ PASS
                             <a class="link-to-markdown" href="/design-pattern-notes-strategy_pattern/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/design-pattern-notes-strategy_pattern/" data-title="设计模式笔记-策略模式"><i class="fab fa-weibo fa-fw"></i>
-</a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="/design-pattern-notes-strategy_pattern/" data-title="设计模式笔记-策略模式"><i class="fab fa-evernote fa-fw"></i>
-</a></span>
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/design-pattern-notes-strategy_pattern/" data-title="设计模式笔记-策略模式"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section><span>
-                        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">
-                            <i class="fas fa-tag fa-fw"></i>设计模式
-                        </a>
-                    </span>&nbsp;</section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></section>
         <section>
             <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -393,18 +286,22 @@ PASS
 
     <div class="post-nav"><a href="/an-anti-intuitive-feature-of-golang-deserialization/" class="prev" rel="prev" title="golang json和gob包反序列化一个反直觉的特点"><i class="fas fa-angle-left fa-fw"></i>golang json和gob包反序列化一个反直觉的特点</a></div>
 </div>
-<div class="comment"></div>
-    </article></div>
+</article></div>
             </main><footer class="footer">
-    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.0"><i class="far fa-heart fa-fw"></i> LoveIt</a>
         </div>
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">太古汤</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
-</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <span>&nbsp;</span>
-        </a><script>
+</div>
+
+        <div id="fixed-buttons" class="animated faster"><a href="#" id="top-button" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="comment-button" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script>
         document.addEventListener('DOMContentLoaded', function () {
             lightGallery(document.getElementById('content'), {
                 selector: '.lightgallery',
@@ -414,6 +311,7 @@ PASS
                 exThumbImage: 'data-thumbnail',
                 thumbWidth: 80,
                 thumbContHeight: 80,
+                actualSize: false,
             });
         });
     </script><script>
@@ -422,8 +320,9 @@ PASS
                 delimiters: [
                     { left: '$$', right: '$$', display: true },
                     { left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: false },
-                    { left: '\\(', right: '\\)', display: false },]
+                    { left: '\\(', right: '\\)', display: false },],
+                strict: false,
             });
         });
-    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.a0f67639490aba5d9a250783c0aa0ed69f83a6f151fb0d7b9fb617c9dbc54565.css" integrity="sha256-oPZ2OUkKul2aJQeDwKoO1p&#43;DpvFR&#43;w17n7YXydvFRWU="><link rel="stylesheet" href="/lib/katex/katex.min.57c495d8c3b51546fadc1c21b795b1f71e8f54735ad3682ff01807fee1f7ba78.css" integrity="sha256-V8SV2MO1FUb63Bwht5Wx9x6PVHNa02gv8BgH/uH3ung="><link rel="stylesheet" href="/lib/katex/copy-tex.min.bf9ff4137fec38f6255419e142d0883c9c52090885d746f80eee12b273d9b3e0.css" integrity="sha256-v5/0E3/sOPYlVBnhQtCIPJxSCQiF10b4Du4SsnPZs&#43;A="><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.54590077ee163035c3dd38dc034e9f6915ecbe680dd832f449afa21672cab116.js" integrity="sha256-VFkAd&#43;4WMDXD3TjcA06faRXsvmgN2DL0Sa&#43;iFnLKsRY="></script><script src="/lib/sharer/sharer.min.9c88f86c7f0820287113f6236200459832693656e80d7556cc80a93dfbd45813.js" integrity="sha256-nIj4bH8IIChxE/YjYgBFmDJpNlboDXVWzICpPfvUWBM="></script><script src="/lib/lazysizes/lazysizes.min.876b4c12685e991d88378c1b6dd3638fd2da0c88f3c24da1ada950c1f26604e1.js" integrity="sha256-h2tMEmhemR2IN4wbbdNjj9LaDIjzwk2hralQwfJmBOE="></script><script src="/lib/lightgallery/lightgallery.min.7a84c63ab156d68e4a7269487c9c65a4eb34b0c7864f2d3fd2b87f7c664480d3.js" integrity="sha256-eoTGOrFW1o5KcmlIfJxlpOs0sMeGTy0/0rh/fGZEgNM="></script><script src="/lib/lightgallery/lg-thumbnail.min.eab31af8f90835b7ab674b2dd2474841039bc01022aa312f80dde6e22fde58d7.js" integrity="sha256-6rMa&#43;PkINberZ0st0kdIQQObwBAiqjEvgN3m4i/eWNc="></script><script src="/lib/lightgallery/lg-zoom.min.e3a7e6bb4a69f8627654ba9e0ab1252971bcfb400538dbb0605db9a3342ce5b9.js" integrity="sha256-46fmu0pp&#43;GJ2VLqeCrElKXG8&#43;0AFONuwYF25ozQs5bk="></script><script src="/lib/katex/katex.min.17f5dd6b9f123dd7140abfb18521b3f4c036cd004f6f40121182a8865f140877.js" integrity="sha256-F/Xda58SPdcUCr&#43;xhSGz9MA2zQBPb0ASEYKohl8UCHc="></script><script src="/lib/katex/auto-render.min.f74776a677f0d2be0af0264058f928e2ba455d0b19bc985304660d922a43a6b2.js" integrity="sha256-90d2pnfw0r4K8CZAWPko4rpFXQsZvJhTBGYNkipDprI="></script><script src="/lib/katex/copy-tex.min.2ab2237329021bc443986c8327f6e61357fb68a54e5d233d224023718c02207d.js" integrity="sha256-KrIjcykCG8RDmGyDJ/bmE1f7aKVOXSM9IkAjcYwCIH0="></script><script src="/lib/katex/mhchem.min.5cea356d6025c5a2f18c454c83ec5674dbb04fab1cd1d75569e77788c6b6f888.js" integrity="sha256-XOo1bWAlxaLxjEVMg&#43;xWdNuwT6sc0ddVaed3iMa2&#43;Ig="></script><script src="/js/theme.min.1482fc67bfa2c3b8cebe476d0037b9321b5b7a8a1525b547b94143948be90e9e.js" integrity="sha256-FIL8Z7&#43;iw7jOvkdtADe5MhtbeooVJbVHuUFDlIvpDp4="></script></body>
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/lib/katex/katex.min.js"></script><script src="/lib/katex/auto-render.min.js"></script><script src="/lib/katex/copy-tex.min.js"></script><script src="/lib/katex/mhchem.min.js"></script><script src="/js/theme.min.js"></script></body>
 </html>

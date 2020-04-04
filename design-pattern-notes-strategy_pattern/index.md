@@ -6,8 +6,13 @@
 定义了算法族，分别封装起来，让他们直接可以互相替换。让算法的变换独立于算法的客户。
 
 
-uml图大概是这个样子
-![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png)
+uml图大概是这个样子：
+<!--
+![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png) 
+-->
+
+<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png" width = "240" align=center />
+
 <!--
 ``` plantuml
  @startuml
@@ -34,7 +39,12 @@ StrategyA, StrategyB 实现了具体的算法(分别封装起来)
 以上面的类图为例，为什么必须要使用策略模式？  
 
 既然一个 StrategyContext 基本上与一个具体的 StrategyInterface 具体实现绑定，用普通的继承可以吗？比如这种：
+
+<!--
 ![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png)
+-->
+<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png" width = "300" align=center />
+
 <!--
 ``` plantuml
 @startuml

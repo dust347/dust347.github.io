@@ -11,11 +11,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/an-anti-intuitive-feature-of-golang-deserialization/" />
 <meta property="article:published_time" content="2020-03-01T23:44:22+08:00" />
-<meta property="article:modified_time" content="2020-03-01T23:44:22+08:00" /><meta property="og:site_name" content="太古汤" />
+<meta property="article:modified_time" content="2020-03-01T23:44:22+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="golang json和gob包反序列化一个反直觉的特点"/>
 <meta name="twitter:description" content=""/>
-<meta name="theme-color" content="#ffffff">
+<meta name="generator" content="Hugo 0.68.3" /><meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="/an-anti-intuitive-feature-of-golang-deserialization/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,12 +23,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="/go-douglas-algorithm/" /><link rel="next" href="/design-pattern-notes-strategy_pattern/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.9a680b90260b5106d79f4075491ab31daafa7429eff686453c40b58357309649.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="><link rel="stylesheet" href="/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css" integrity="sha256-PHcOkPmOshsMBC&#43;vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><link rel="stylesheet" href="/css/style.min.5d8948958414757ef45604b42ecd0d5b536f72d8a7d7ecae64fe3f190ad0bc12.css" integrity="sha256-XYlIlYQUdX70VgS0Ls0NW1Nvctin1&#43;yuZP4/GQrQvBI=">
-<script type="application/ld+json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="/go-douglas-algorithm/" /><link rel="next" href="/design-pattern-notes-strategy_pattern/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "golang json和gob包反序列化一个反直觉的特点",
+        "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/an-anti-intuitive-feature-of-golang-deserialization\/"
@@ -37,8 +37,8 @@
                 "url": "\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "golang","wordcount":  792 ,
-        "url": "\/an-anti-intuitive-feature-of-golang-deserialization\/","datePublished": "2020-03-01T23:44:22\x2b08:00","dateModified": "2020-03-01T23:44:22\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "golang","wordcount":  767 ,
+        "url": "\/an-anti-intuitive-feature-of-golang-deserialization\/","datePublished": "2020-03-01","dateModified": "2020-03-01","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -47,6 +47,9 @@
                 "width":  127 ,
                 "height":  40 
                 }
+            },"author": {
+                "@type": "Person",
+                "name": "太古汤"
             },"description": ""
     }
     </script></head>
@@ -57,28 +60,27 @@
             window.isDark && document.body.classList.add('dark-theme');
         </script><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
-        <div class="header-title animated bounceIn">
+        <div class="header-title">
             <a href="/">太古汤</a>
         </div>
-        <div class="menu"><a class="menu-item" href="/posts/">Posts</a><a class="menu-item" href="/tags/">Tags</a><a class="menu-item" href="/categories/">Categories</a><a class="menu-item" href="/about/">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" rel="noopener noreffer">About</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-wrapper">
         <div class="header-container">
-            <div class="header-title animated bounceIn">
+            <div class="header-title">
                 <a href="/">太古汤</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header>
 
@@ -88,516 +90,260 @@
 </script>
 <main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animated flipInX">golang json和gob包反序列化一个反直觉的特点</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author">
-                    <a class="author" href="/" rel="author" target="_blank">
-                        <i class="fas fa-user-circle fa-fw"></i>太古汤
-                    </a>
-                </span>&nbsp;<span class="post-category">included in&nbsp;
-                            <span>
-                                <a href="/categories/golang">
-                                    <i class="far fa-folder fa-fw"></i>Golang
-                                </a>
-                            </span></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>太古汤</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/golang">
+                                <i class="far fa-folder fa-fw"></i>Golang
+                            </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-01>2020-03-01</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 792 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>4 min&nbsp;</div>
+                <i class="fas fa-pencil-alt fa-fw"></i>about 767 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>4 min&nbsp;<span id="/an-anti-intuitive-feature-of-golang-deserialization/" class="leancloud_visitors" data-flag-title="golang json和gob包反序列化一个反直觉的特点">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
         </div><div class="content" id="content"><h2 id="1概述">1.概述</h2>
 <p>在使用golang对二进制反序列化的时候，会将反序列化的结果写入结构体的实例(当然必须能对应上才行)。一般来说，直觉上会认为如果要反序列话的二进制是空的(或者某些字段的值是空的)，反序列化后，对应的结构体(或对应的字段)应该是空。但是实际上，json包和gob包反序列化会用二进制对应的值去覆盖要赋值的结构体原有的值。也就是说，如果反序列化的时候，要写入的结构体的实例本身不为空，同时二进制为空的时候，反序列化并不会将这个结构体的值清空。</p>
 <h2 id="2试验代码">2.试验代码</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span><span class="lnt">149
-</span><span class="lnt">150
-</span><span class="lnt">151
-</span><span class="lnt">152
-</span><span class="lnt">153
-</span><span class="lnt">154
-</span><span class="lnt">155
-</span><span class="lnt">156
-</span><span class="lnt">157
-</span><span class="lnt">158
-</span><span class="lnt">159
-</span><span class="lnt">160
-</span><span class="lnt">161
-</span><span class="lnt">162
-</span><span class="lnt">163
-</span><span class="lnt">164
-</span><span class="lnt">165
-</span><span class="lnt">166
-</span><span class="lnt">167
-</span><span class="lnt">168
-</span><span class="lnt">169
-</span><span class="lnt">170
-</span><span class="lnt">171
-</span><span class="lnt">172
-</span><span class="lnt">173
-</span><span class="lnt">174
-</span><span class="lnt">175
-</span><span class="lnt">176
-</span><span class="lnt">177
-</span><span class="lnt">178
-</span><span class="lnt">179
-</span><span class="lnt">180
-</span><span class="lnt">181
-</span><span class="lnt">182
-</span><span class="lnt">183
-</span><span class="lnt">184
-</span><span class="lnt">185
-</span><span class="lnt">186
-</span><span class="lnt">187
-</span><span class="lnt">188
-</span><span class="lnt">189
-</span><span class="lnt">190
-</span><span class="lnt">191
-</span><span class="lnt">192
-</span><span class="lnt">193
-</span><span class="lnt">194
-</span><span class="lnt">195
-</span><span class="lnt">196
-</span><span class="lnt">197
-</span><span class="lnt">198
-</span><span class="lnt">199
-</span><span class="lnt">200
-</span><span class="lnt">201
-</span><span class="lnt">202
-</span><span class="lnt">203
-</span><span class="lnt">204
-</span><span class="lnt">205
-</span><span class="lnt">206
-</span><span class="lnt">207
-</span><span class="lnt">208
-</span><span class="lnt">209
-</span><span class="lnt">210
-</span><span class="lnt">211
-</span><span class="lnt">212
-</span><span class="lnt">213
-</span><span class="lnt">214
-</span><span class="lnt">215
-</span><span class="lnt">216
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main_test</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;bytes&#34;</span>
-	<span class="s">&#34;encoding/gob&#34;</span>
-	<span class="s">&#34;encoding/json&#34;</span>
-	<span class="s">&#34;testing&#34;</span>
-<span class="p">)</span>
-
-<span class="c1">//S 用来试验的结构体定义
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">S</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">A</span>   <span class="kt">int</span>      <span class="s">`json:&#34;a,omitempty&#34;`</span>
-	<span class="nx">Str</span> <span class="kt">string</span>   <span class="s">`json:&#34;str,omitempty&#34;`</span>
-	<span class="nx">B</span>   <span class="p">[]</span><span class="kt">string</span> <span class="s">`json:&#34;b,omitempty&#34;`</span>
-<span class="p">}</span>
-
-<span class="c1">//测试JSON反序列
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestJSON</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">s1</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;a&#34;</span><span class="p">,</span>
-			<span class="s">&#34;b&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-
-	<span class="nx">s2</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-	<span class="p">}</span>
-
-	<span class="c1">//序列化
-</span><span class="c1"></span>	<span class="nx">raw1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;raw1=%s&#34;</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
-
-	<span class="nx">raw2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="c1">//部分字段有值
-</span><span class="c1"></span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;raw2=%s&#34;</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
-
-	<span class="c1">//反序列化
-</span><span class="c1"></span>
-	<span class="c1">//当要反序列化的对象，是空的
-</span><span class="c1"></span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身为空的情况&#34;</span><span class="p">)</span>
-	<span class="kd">var</span> <span class="nx">s</span> <span class="nx">S</span>
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//正常反序列化
-</span><span class="c1"></span>
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{}</span>
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//raw2已有A字段有值
-</span><span class="c1"></span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身有值的情况&#34;</span><span class="p">)</span>
-
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;3&#34;</span><span class="p">,</span>
-			<span class="s">&#34;4&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;3&#34;</span><span class="p">,</span>
-			<span class="s">&#34;4&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//raw2已有A字段有值
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">TestGob</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">s1</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;a&#34;</span><span class="p">,</span>
-			<span class="s">&#34;b&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-
-	<span class="nx">s2</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-	<span class="p">}</span> <span class="c1">//empty
-</span><span class="c1"></span>
-	<span class="c1">//序列化
-</span><span class="c1"></span>	<span class="nx">raw1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">raw2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="c1">//反序列化
-</span><span class="c1"></span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身为空的情况&#34;</span><span class="p">)</span>
-	<span class="kd">var</span> <span class="nx">s</span> <span class="nx">S</span>
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{}</span>
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身不为空的情况&#34;</span><span class="p">)</span>
-
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;3&#34;</span><span class="p">,</span>
-			<span class="s">&#34;4&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
-		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
-		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
-		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-			<span class="s">&#34;3&#34;</span><span class="p">,</span>
-			<span class="s">&#34;4&#34;</span><span class="p">,</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">)</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">buf</span> <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
-	<span class="nx">enc</span> <span class="o">:=</span> <span class="nx">gob</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">buf</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">enc</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span> <span class="nx">err</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">(),</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">,</span> <span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-	<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-	<span class="nx">dec</span> <span class="o">:=</span> <span class="nx">gob</span><span class="p">.</span><span class="nf">NewDecoder</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span>
-
-	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">dec</span><span class="p">.</span><span class="nf">Decode</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">err</span>
-	<span class="p">}</span>
-
-	<span class="k">return</span> <span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">)</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">,</span> <span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>返回结果如下:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">=== RUN   TestJSON
---- PASS: TestJSON (0.00s)
-    go_test.go:38: raw1={&#34;a&#34;:1,&#34;str&#34;:&#34;test&#34;,&#34;b&#34;:[&#34;a&#34;,&#34;b&#34;]}
-    go_test.go:45: raw2={&#34;a&#34;:2}
-    go_test.go:50: s 本身为空的情况
-    go_test.go:57: decode raw1 to s: {A:1 Str:test B:[a b]}
-    go_test.go:64: decode raw2 to s: {A:2 Str: B:[]}
-    go_test.go:66: s 本身有值的情况
-    go_test.go:77: s={A:3 Str:test3 B:[3 4]}
-    go_test.go:84: decode raw1 to s: {A:1 Str:test B:[a b]}
-    go_test.go:95: s={A:3 Str:test3 B:[3 4]}
-    go_test.go:101: decode raw2 to s: {A:2 Str:test3 B:[3 4]}
-=== RUN   TestGob
---- PASS: TestGob (0.00s)
-    go_test.go:131: s 本身为空的情况
-    go_test.go:138: decode raw1 to s: {A:1 Str:test B:[a b]}
-    go_test.go:145: decode raw2 to s: {A:2 Str: B:[]}
-    go_test.go:147: s 本身不为空的情况
-    go_test.go:158: s={A:3 Str:test3 B:[3 4]}
-    go_test.go:165: decode raw1 to s: {A:1 Str:test B:[a b]}
-    go_test.go:175: s={A:3 Str:test3 B:[3 4]}
-    go_test.go:181: decode raw2 to s: {A:2 Str:test3 B:[3 4]}
-PASS
-ok  	test	0.400s
-</code></pre></td></tr></table>
-</div>
-</div><p>从结果上看，反序列化的过程应该是将二进制对应的值去覆盖要写入的结构体实例对应的字段。而不会对原有的值进行清空。另外，json包反序列化的时候，如果没有指定omitempty，序列化生成的json串所有的字段都是有值的，只不过值是空。</p></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln">  1</span><span class="kn">package</span> <span class="nx">main_test</span>
+<span class="ln">  2</span>
+<span class="ln">  3</span><span class="kn">import</span> <span class="p">(</span>
+<span class="ln">  4</span>	<span class="s">&#34;bytes&#34;</span>
+<span class="ln">  5</span>	<span class="s">&#34;encoding/gob&#34;</span>
+<span class="ln">  6</span>	<span class="s">&#34;encoding/json&#34;</span>
+<span class="ln">  7</span>	<span class="s">&#34;testing&#34;</span>
+<span class="ln">  8</span><span class="p">)</span>
+<span class="ln">  9</span>
+<span class="ln"> 10</span><span class="c1">//S 用来试验的结构体定义
+</span><span class="ln"> 11</span><span class="c1"></span><span class="kd">type</span> <span class="nx">S</span> <span class="kd">struct</span> <span class="p">{</span>
+<span class="ln"> 12</span>	<span class="nx">A</span>   <span class="kt">int</span>      <span class="s">`json:&#34;a,omitempty&#34;`</span>
+<span class="ln"> 13</span>	<span class="nx">Str</span> <span class="kt">string</span>   <span class="s">`json:&#34;str,omitempty&#34;`</span>
+<span class="ln"> 14</span>	<span class="nx">B</span>   <span class="p">[]</span><span class="kt">string</span> <span class="s">`json:&#34;b,omitempty&#34;`</span>
+<span class="ln"> 15</span><span class="p">}</span>
+<span class="ln"> 16</span>
+<span class="ln"> 17</span><span class="c1">//测试JSON反序列
+</span><span class="ln"> 18</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestJSON</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 19</span>	<span class="nx">s1</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln"> 20</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
+<span class="ln"> 21</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test&#34;</span><span class="p">,</span>
+<span class="ln"> 22</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln"> 23</span>			<span class="s">&#34;a&#34;</span><span class="p">,</span>
+<span class="ln"> 24</span>			<span class="s">&#34;b&#34;</span><span class="p">,</span>
+<span class="ln"> 25</span>		<span class="p">},</span>
+<span class="ln"> 26</span>	<span class="p">}</span>
+<span class="ln"> 27</span>
+<span class="ln"> 28</span>	<span class="nx">s2</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln"> 29</span>		<span class="nx">A</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="ln"> 30</span>	<span class="p">}</span>
+<span class="ln"> 31</span>
+<span class="ln"> 32</span>	<span class="c1">//序列化
+</span><span class="ln"> 33</span><span class="c1"></span>	<span class="nx">raw1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s1</span><span class="p">)</span>
+<span class="ln"> 34</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 35</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln"> 36</span>	<span class="p">}</span>
+<span class="ln"> 37</span>
+<span class="ln"> 38</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;raw1=%s&#34;</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
+<span class="ln"> 39</span>
+<span class="ln"> 40</span>	<span class="nx">raw2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s2</span><span class="p">)</span>
+<span class="ln"> 41</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 42</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln"> 43</span>	<span class="p">}</span>
+<span class="ln"> 44</span>	<span class="c1">//部分字段有值
+</span><span class="ln"> 45</span><span class="c1"></span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;raw2=%s&#34;</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
+<span class="ln"> 46</span>
+<span class="ln"> 47</span>	<span class="c1">//反序列化
+</span><span class="ln"> 48</span><span class="c1"></span>
+<span class="ln"> 49</span>	<span class="c1">//当要反序列化的对象，是空的
+</span><span class="ln"> 50</span><span class="c1"></span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身为空的情况&#34;</span><span class="p">)</span>
+<span class="ln"> 51</span>	<span class="kd">var</span> <span class="nx">s</span> <span class="nx">S</span>
+<span class="ln"> 52</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
+<span class="ln"> 53</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 54</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln"> 55</span>	<span class="p">}</span>
+<span class="ln"> 56</span>
+<span class="ln"> 57</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//正常反序列化
+</span><span class="ln"> 58</span><span class="c1"></span>
+<span class="ln"> 59</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{}</span>
+<span class="ln"> 60</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
+<span class="ln"> 61</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 62</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln"> 63</span>	<span class="p">}</span>
+<span class="ln"> 64</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//raw2已有A字段有值
+</span><span class="ln"> 65</span><span class="c1"></span>
+<span class="ln"> 66</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身有值的情况&#34;</span><span class="p">)</span>
+<span class="ln"> 67</span>
+<span class="ln"> 68</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln"> 69</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
+<span class="ln"> 70</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
+<span class="ln"> 71</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln"> 72</span>			<span class="s">&#34;3&#34;</span><span class="p">,</span>
+<span class="ln"> 73</span>			<span class="s">&#34;4&#34;</span><span class="p">,</span>
+<span class="ln"> 74</span>		<span class="p">},</span>
+<span class="ln"> 75</span>	<span class="p">}</span>
+<span class="ln"> 76</span>
+<span class="ln"> 77</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln"> 78</span>
+<span class="ln"> 79</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
+<span class="ln"> 80</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 81</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln"> 82</span>	<span class="p">}</span>
+<span class="ln"> 83</span>
+<span class="ln"> 84</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln"> 85</span>
+<span class="ln"> 86</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln"> 87</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
+<span class="ln"> 88</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
+<span class="ln"> 89</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln"> 90</span>			<span class="s">&#34;3&#34;</span><span class="p">,</span>
+<span class="ln"> 91</span>			<span class="s">&#34;4&#34;</span><span class="p">,</span>
+<span class="ln"> 92</span>		<span class="p">},</span>
+<span class="ln"> 93</span>	<span class="p">}</span>
+<span class="ln"> 94</span>
+<span class="ln"> 95</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln"> 96</span>
+<span class="ln"> 97</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
+<span class="ln"> 98</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln"> 99</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">100</span>	<span class="p">}</span>
+<span class="ln">101</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">//raw2已有A字段有值
+</span><span class="ln">102</span><span class="c1"></span><span class="p">}</span>
+<span class="ln">103</span>
+<span class="ln">104</span><span class="kd">func</span> <span class="nf">TestGob</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">105</span>	<span class="nx">s1</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln">106</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">1</span><span class="p">,</span>
+<span class="ln">107</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test&#34;</span><span class="p">,</span>
+<span class="ln">108</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln">109</span>			<span class="s">&#34;a&#34;</span><span class="p">,</span>
+<span class="ln">110</span>			<span class="s">&#34;b&#34;</span><span class="p">,</span>
+<span class="ln">111</span>		<span class="p">},</span>
+<span class="ln">112</span>	<span class="p">}</span>
+<span class="ln">113</span>
+<span class="ln">114</span>	<span class="nx">s2</span> <span class="o">:=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln">115</span>		<span class="nx">A</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="ln">116</span>	<span class="p">}</span> <span class="c1">//empty
+</span><span class="ln">117</span><span class="c1"></span>
+<span class="ln">118</span>	<span class="c1">//序列化
+</span><span class="ln">119</span><span class="c1"></span>	<span class="nx">raw1</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s1</span><span class="p">)</span>
+<span class="ln">120</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">121</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">122</span>	<span class="p">}</span>
+<span class="ln">123</span>
+<span class="ln">124</span>	<span class="nx">raw2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s2</span><span class="p">)</span>
+<span class="ln">125</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">126</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">127</span>	<span class="p">}</span>
+<span class="ln">128</span>
+<span class="ln">129</span>	<span class="c1">//反序列化
+</span><span class="ln">130</span><span class="c1"></span>
+<span class="ln">131</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身为空的情况&#34;</span><span class="p">)</span>
+<span class="ln">132</span>	<span class="kd">var</span> <span class="nx">s</span> <span class="nx">S</span>
+<span class="ln">133</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
+<span class="ln">134</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">135</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">136</span>	<span class="p">}</span>
+<span class="ln">137</span>
+<span class="ln">138</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">139</span>
+<span class="ln">140</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{}</span>
+<span class="ln">141</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
+<span class="ln">142</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">143</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">144</span>	<span class="p">}</span>
+<span class="ln">145</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">146</span>
+<span class="ln">147</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;s 本身不为空的情况&#34;</span><span class="p">)</span>
+<span class="ln">148</span>
+<span class="ln">149</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln">150</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
+<span class="ln">151</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
+<span class="ln">152</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln">153</span>			<span class="s">&#34;3&#34;</span><span class="p">,</span>
+<span class="ln">154</span>			<span class="s">&#34;4&#34;</span><span class="p">,</span>
+<span class="ln">155</span>		<span class="p">},</span>
+<span class="ln">156</span>	<span class="p">}</span>
+<span class="ln">157</span>
+<span class="ln">158</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">159</span>
+<span class="ln">160</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw1</span><span class="p">)</span>
+<span class="ln">161</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">162</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">163</span>	<span class="p">}</span>
+<span class="ln">164</span>
+<span class="ln">165</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw1 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">166</span>
+<span class="ln">167</span>	<span class="nx">s</span> <span class="p">=</span> <span class="nx">S</span><span class="p">{</span>
+<span class="ln">168</span>		<span class="nx">A</span><span class="p">:</span>   <span class="mi">3</span><span class="p">,</span>
+<span class="ln">169</span>		<span class="nx">Str</span><span class="p">:</span> <span class="s">&#34;test3&#34;</span><span class="p">,</span>
+<span class="ln">170</span>		<span class="nx">B</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="ln">171</span>			<span class="s">&#34;3&#34;</span><span class="p">,</span>
+<span class="ln">172</span>			<span class="s">&#34;4&#34;</span><span class="p">,</span>
+<span class="ln">173</span>		<span class="p">},</span>
+<span class="ln">174</span>	<span class="p">}</span>
+<span class="ln">175</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;s=%+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">176</span>
+<span class="ln">177</span>	<span class="nx">err</span> <span class="p">=</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">,</span> <span class="nx">raw2</span><span class="p">)</span>
+<span class="ln">178</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">179</span>		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="ln">180</span>	<span class="p">}</span>
+<span class="ln">181</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Logf</span><span class="p">(</span><span class="s">&#34;decode raw2 to s: %+v&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">182</span>
+<span class="ln">183</span><span class="p">}</span>
+<span class="ln">184</span>
+<span class="ln">185</span><span class="kd">func</span> <span class="nf">genGobRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">)</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">186</span>	<span class="kd">var</span> <span class="nx">buf</span> <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+<span class="ln">187</span>	<span class="nx">enc</span> <span class="o">:=</span> <span class="nx">gob</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">buf</span><span class="p">)</span>
+<span class="ln">188</span>
+<span class="ln">189</span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">enc</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">)</span>
+<span class="ln">190</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">191</span>		<span class="k">return</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{},</span> <span class="nx">err</span>
+<span class="ln">192</span>	<span class="p">}</span>
+<span class="ln">193</span>
+<span class="ln">194</span>	<span class="k">return</span> <span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">(),</span> <span class="kc">nil</span>
+<span class="ln">195</span><span class="p">}</span>
+<span class="ln">196</span>
+<span class="ln">197</span><span class="kd">func</span> <span class="nf">decodeGobRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">,</span> <span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="ln">198</span>	<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="ln">199</span>	<span class="nx">dec</span> <span class="o">:=</span> <span class="nx">gob</span><span class="p">.</span><span class="nf">NewDecoder</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span>
+<span class="ln">200</span>
+<span class="ln">201</span>	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">dec</span><span class="p">.</span><span class="nf">Decode</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="ln">202</span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+<span class="ln">203</span>		<span class="k">return</span> <span class="nx">err</span>
+<span class="ln">204</span>	<span class="p">}</span>
+<span class="ln">205</span>
+<span class="ln">206</span>	<span class="k">return</span> <span class="kc">nil</span>
+<span class="ln">207</span><span class="p">}</span>
+<span class="ln">208</span>
+<span class="ln">209</span><span class="kd">func</span> <span class="nf">genJSONRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">)</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">210</span>	<span class="k">return</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="ln">211</span><span class="p">}</span>
+<span class="ln">212</span>
+<span class="ln">213</span><span class="kd">func</span> <span class="nf">decodeJSONRaw</span><span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">S</span><span class="p">,</span> <span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="ln">214</span>	<span class="k">return</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
+<span class="ln">215</span><span class="p">}</span>
+<span class="ln">216</span>
+</code></pre></div><p>返回结果如下:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>=== RUN   TestJSON
+<span class="ln"> 2</span>--- PASS: TestJSON (0.00s)
+<span class="ln"> 3</span>    go_test.go:38: raw1={&#34;a&#34;:1,&#34;str&#34;:&#34;test&#34;,&#34;b&#34;:[&#34;a&#34;,&#34;b&#34;]}
+<span class="ln"> 4</span>    go_test.go:45: raw2={&#34;a&#34;:2}
+<span class="ln"> 5</span>    go_test.go:50: s 本身为空的情况
+<span class="ln"> 6</span>    go_test.go:57: decode raw1 to s: {A:1 Str:test B:[a b]}
+<span class="ln"> 7</span>    go_test.go:64: decode raw2 to s: {A:2 Str: B:[]}
+<span class="ln"> 8</span>    go_test.go:66: s 本身有值的情况
+<span class="ln"> 9</span>    go_test.go:77: s={A:3 Str:test3 B:[3 4]}
+<span class="ln">10</span>    go_test.go:84: decode raw1 to s: {A:1 Str:test B:[a b]}
+<span class="ln">11</span>    go_test.go:95: s={A:3 Str:test3 B:[3 4]}
+<span class="ln">12</span>    go_test.go:101: decode raw2 to s: {A:2 Str:test3 B:[3 4]}
+<span class="ln">13</span>=== RUN   TestGob
+<span class="ln">14</span>--- PASS: TestGob (0.00s)
+<span class="ln">15</span>    go_test.go:131: s 本身为空的情况
+<span class="ln">16</span>    go_test.go:138: decode raw1 to s: {A:1 Str:test B:[a b]}
+<span class="ln">17</span>    go_test.go:145: decode raw2 to s: {A:2 Str: B:[]}
+<span class="ln">18</span>    go_test.go:147: s 本身不为空的情况
+<span class="ln">19</span>    go_test.go:158: s={A:3 Str:test3 B:[3 4]}
+<span class="ln">20</span>    go_test.go:165: decode raw1 to s: {A:1 Str:test B:[a b]}
+<span class="ln">21</span>    go_test.go:175: s={A:3 Str:test3 B:[3 4]}
+<span class="ln">22</span>    go_test.go:181: decode raw2 to s: {A:2 Str:test3 B:[3 4]}
+<span class="ln">23</span>PASS
+<span class="ln">24</span>ok  	test	0.400s
+</code></pre></div><p>从结果上看，反序列化的过程应该是将二进制对应的值去覆盖要写入的结构体实例对应的字段。而不会对原有的值进行清空。另外，json包反序列化的时候，如果没有指定omitempty，序列化生成的json串所有的字段都是有值的，只不过值是空。</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -610,19 +356,13 @@ ok  	test	0.400s
                             <a class="link-to-markdown" href="/an-anti-intuitive-feature-of-golang-deserialization/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/an-anti-intuitive-feature-of-golang-deserialization/" data-title="golang json和gob包反序列化一个反直觉的特点"><i class="fab fa-weibo fa-fw"></i>
-</a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="/an-anti-intuitive-feature-of-golang-deserialization/" data-title="golang json和gob包反序列化一个反直觉的特点"><i class="fab fa-evernote fa-fw"></i>
-</a></span>
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/an-anti-intuitive-feature-of-golang-deserialization/" data-title="golang json和gob包反序列化一个反直觉的特点"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section><span>
-                        <a href="/tags/golang">
-                            <i class="fas fa-tag fa-fw"></i>golang
-                        </a>
-                    </span>&nbsp;</section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang">golang</a></section>
         <section>
             <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -631,16 +371,33 @@ ok  	test	0.400s
     <div class="post-nav"><a href="/go-douglas-algorithm/" class="prev" rel="prev" title="道格拉斯算法-go语言实现"><i class="fas fa-angle-left fa-fw"></i>道格拉斯算法-go语言实现</a>
             <a href="/design-pattern-notes-strategy_pattern/" class="next" rel="next" title="设计模式笔记-策略模式">设计模式笔记-策略模式<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-<div class="comment"></div>
-    </article></div>
+</article></div>
             </main><footer class="footer">
-    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.0"><i class="far fa-heart fa-fw"></i> LoveIt</a>
         </div>
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">太古汤</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
-</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <span>&nbsp;</span>
-        </a><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.54590077ee163035c3dd38dc034e9f6915ecbe680dd832f449afa21672cab116.js" integrity="sha256-VFkAd&#43;4WMDXD3TjcA06faRXsvmgN2DL0Sa&#43;iFnLKsRY="></script><script src="/lib/sharer/sharer.min.9c88f86c7f0820287113f6236200459832693656e80d7556cc80a93dfbd45813.js" integrity="sha256-nIj4bH8IIChxE/YjYgBFmDJpNlboDXVWzICpPfvUWBM="></script><script src="/js/theme.min.1482fc67bfa2c3b8cebe476d0037b9321b5b7a8a1525b547b94143948be90e9e.js" integrity="sha256-FIL8Z7&#43;iw7jOvkdtADe5MhtbeooVJbVHuUFDlIvpDp4="></script></body>
+</div>
+
+        <div id="fixed-buttons" class="animated faster"><a href="#" id="top-button" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="comment-button" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+                actualSize: false,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
 </html>

@@ -11,11 +11,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/go-douglas-algorithm/" />
 <meta property="article:published_time" content="2019-04-07T23:32:28+08:00" />
-<meta property="article:modified_time" content="2019-04-07T23:32:28+08:00" /><meta property="og:site_name" content="太古汤" />
+<meta property="article:modified_time" content="2019-04-07T23:32:28+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="道格拉斯算法-go语言实现"/>
 <meta name="twitter:description" content=""/>
-<meta name="theme-color" content="#ffffff">
+<meta name="generator" content="Hugo 0.68.3" /><meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="/go-douglas-algorithm/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,12 +23,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="next" href="/an-anti-intuitive-feature-of-golang-deserialization/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.9a680b90260b5106d79f4075491ab31daafa7429eff686453c40b58357309649.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="><link rel="stylesheet" href="/lib/animate/animate.min.3c770e90f98eb21b0c042fafb49755af93306fbaf42e449524f94fae9fc83295.css" integrity="sha256-PHcOkPmOshsMBC&#43;vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="><link rel="stylesheet" href="/css/style.min.5d8948958414757ef45604b42ecd0d5b536f72d8a7d7ecae64fe3f190ad0bc12.css" integrity="sha256-XYlIlYQUdX70VgS0Ls0NW1Nvctin1&#43;yuZP4/GQrQvBI=">
-<script type="application/ld+json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="next" href="/an-anti-intuitive-feature-of-golang-deserialization/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "道格拉斯算法-go语言实现",
+        "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/go-douglas-algorithm\/"
@@ -37,8 +37,8 @@
                 "url": "\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "golang","wordcount":  347 ,
-        "url": "\/go-douglas-algorithm\/","datePublished": "2019-04-07T23:32:28\x2b08:00","dateModified": "2019-04-07T23:32:28\x2b08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "golang","wordcount":  324 ,
+        "url": "\/go-douglas-algorithm\/","datePublished": "2019-04-07","dateModified": "2019-04-07","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -47,6 +47,9 @@
                 "width":  127 ,
                 "height":  40 
                 }
+            },"author": {
+                "@type": "Person",
+                "name": "太古汤"
             },"description": ""
     }
     </script></head>
@@ -57,28 +60,27 @@
             window.isDark && document.body.classList.add('dark-theme');
         </script><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
-        <div class="header-title animated bounceIn">
+        <div class="header-title">
             <a href="/">太古汤</a>
         </div>
-        <div class="menu"><a class="menu-item" href="/posts/">Posts</a><a class="menu-item" href="/tags/">Tags</a><a class="menu-item" href="/categories/">Categories</a><a class="menu-item" href="/about/">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" rel="noopener noreffer">About</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header><header class="mobile" id="header-mobile">
     <div class="header-wrapper">
         <div class="header-container">
-            <div class="header-title animated bounceIn">
+            <div class="header-title">
                 <a href="/">太古汤</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-rotate-180 fa-fw"></i>
-            </a>
-        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
 </header>
 
@@ -88,19 +90,15 @@
 </script>
 <main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animated flipInX">道格拉斯算法-go语言实现</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author">
-                    <a class="author" href="/" rel="author" target="_blank">
-                        <i class="fas fa-user-circle fa-fw"></i>太古汤
-                    </a>
-                </span>&nbsp;<span class="post-category">included in&nbsp;
-                            <span>
-                                <a href="/categories/golang">
-                                    <i class="far fa-folder fa-fw"></i>Golang
-                                </a>
-                            </span></span></div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>太古汤</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/golang">
+                                <i class="far fa-folder fa-fw"></i>Golang
+                            </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-04-07>2019-04-07</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 347 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>2 min&nbsp;</div>
+                <i class="fas fa-pencil-alt fa-fw"></i>about 324 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>2 min&nbsp;<span id="/go-douglas-algorithm/" class="leancloud_visitors" data-flag-title="道格拉斯算法-go语言实现">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
         </div><div class="toc" id="toc-auto">
                 <h2 class="toc-title">Contents</h2>
                 <div class="toc-content" id="toc-content-auto"></div>
@@ -149,195 +147,98 @@
 </li>
 </ul>
 <h2 id="3代码实现">3.代码实现</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span><span class="lnt">82
-</span><span class="lnt">83
-</span><span class="lnt">84
-</span><span class="lnt">85
-</span><span class="lnt">86
-</span><span class="lnt">87
-</span><span class="lnt">88
-</span><span class="lnt">89
-</span><span class="lnt">90
-</span><span class="lnt">91
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">Util</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;math&#34;</span>
-<span class="p">)</span>
-
-<span class="cm">/*
-</span><span class="cm">* @author dust347
-</span><span class="cm">* @brief
-</span><span class="cm">*/</span>
-<span class="c1">//point
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Point</span> <span class="kd">struct</span><span class="p">{</span>
-	<span class="nx">X</span> <span class="kt">float64</span>
-	<span class="nx">Y</span> <span class="kt">float64</span>
-<span class="p">}</span>
-
-
-<span class="c1">//计算两点之间距离
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="c1">//计算点到另外两点所确定的直线的距离
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">linePtX2</span><span class="p">,</span> <span class="nx">linePtY2</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
-	<span class="c1">//如果线的两个点一样，相当于计算两点之间距离
-</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">linePtX1</span> <span class="o">==</span> <span class="nx">linePtX2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">linePtY1</span> <span class="o">==</span> <span class="nx">linePtY2</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">d</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">linePtY2</span><span class="o">*</span><span class="nx">x</span><span class="o">-</span><span class="nx">linePtY1</span><span class="o">*</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">linePtX1</span><span class="o">*</span><span class="nx">y</span><span class="o">-</span><span class="nx">linePtX2</span><span class="o">*</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">linePtX2</span><span class="o">*</span><span class="nx">linePtY1</span><span class="o">-</span><span class="nx">linePtX1</span><span class="o">*</span><span class="nx">linePtY2</span><span class="p">)</span> <span class="o">/</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">))</span>
-	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">//道格拉斯抽稀算法
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">(</span><span class="nx">vecPtRes</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="p">{</span>			<span class="c1">//小于两个点直接返回
-</span><span class="c1"></span>		<span class="k">return</span> <span class="nx">vecPt</span>
-	<span class="p">}</span>
-
-
-	<span class="c1">//用于标记哪些点需要保留
-</span><span class="c1"></span>	<span class="nx">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
-
-	<span class="c1">//两端点必保留
-</span><span class="c1"></span>	<span class="nx">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
-	<span class="nx">m</span><span class="p">[</span><span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
-	<span class="nf">douglas</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">vecPt</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">m</span><span class="p">)</span>
-
-	<span class="c1">//返回数据
-</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">vecPt</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">m</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">{</span>
-			<span class="nx">vecPtRes</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">vecPtRes</span><span class="p">,</span> <span class="nx">pt</span><span class="p">)</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="o">*</span><span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">r</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">m</span> <span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">r</span> <span class="o">-</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-
-	<span class="c1">//取两个端点的数据
-</span><span class="c1"></span>	<span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">l</span><span class="p">])</span>
-	<span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">r</span><span class="p">])</span>
-
-	<span class="kd">var</span> <span class="nx">maxDist</span> <span class="kt">float64</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>		<span class="c1">//记录最大距离
-</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">keepIndex</span> <span class="kt">int</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>			<span class="c1">//记录要保留的点的index
-</span><span class="c1"></span>
-	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="nx">l</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">r</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">i</span><span class="p">])</span>
-		<span class="nx">d</span> <span class="o">:=</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
-
-		<span class="k">if</span> <span class="nx">d</span> <span class="p">&gt;</span> <span class="nx">maxDist</span> <span class="p">{</span>
-			<span class="nx">maxDist</span> <span class="p">=</span> <span class="nx">d</span>
-			<span class="nx">keepIndex</span> <span class="p">=</span> <span class="nx">i</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-
-	<span class="k">if</span> <span class="nx">maxDist</span> <span class="p">&gt;</span> <span class="nx">tolerance</span> <span class="p">{</span>
-		<span class="p">(</span><span class="o">*</span><span class="nx">m</span><span class="p">)[</span><span class="nx">keepIndex</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
-		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
-		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">pt2float</span><span class="p">(</span><span class="nx">pt</span> <span class="nx">Point</span><span class="p">)</span> <span class="p">(</span><span class="kt">float64</span><span class="p">,</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">X</span><span class="p">,</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">Y</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
-</div>
-</div></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln"> 1</span><span class="kn">package</span> <span class="nx">Util</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="p">(</span>
+<span class="ln"> 4</span>	<span class="s">&#34;math&#34;</span>
+<span class="ln"> 5</span><span class="p">)</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="cm">/*
+</span><span class="ln"> 8</span><span class="cm">* @author dust347
+</span><span class="ln"> 9</span><span class="cm">* @brief
+</span><span class="ln">10</span><span class="cm">*/</span>
+<span class="ln">11</span><span class="c1">//point
+</span><span class="ln">12</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Point</span> <span class="kd">struct</span><span class="p">{</span>
+<span class="ln">13</span>	<span class="nx">X</span> <span class="kt">float64</span>
+<span class="ln">14</span>	<span class="nx">Y</span> <span class="kt">float64</span>
+<span class="ln">15</span><span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span>
+<span class="ln">18</span><span class="c1">//计算两点之间距离
+</span><span class="ln">19</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
+<span class="ln">20</span>	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">x1</span><span class="o">-</span><span class="nx">x2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">y1</span><span class="o">-</span><span class="nx">y2</span><span class="p">))</span>
+<span class="ln">21</span><span class="p">}</span>
+<span class="ln">22</span>
+<span class="ln">23</span><span class="c1">//计算点到另外两点所确定的直线的距离
+</span><span class="ln">24</span><span class="c1"></span><span class="kd">func</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">linePtX2</span><span class="p">,</span> <span class="nx">linePtY2</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>
+<span class="ln">25</span>	<span class="c1">//如果线的两个点一样，相当于计算两点之间距离
+</span><span class="ln">26</span><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">linePtX1</span> <span class="o">==</span> <span class="nx">linePtX2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">linePtY1</span> <span class="o">==</span> <span class="nx">linePtY2</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">27</span>		<span class="k">return</span> <span class="nf">GetDistPt</span><span class="p">(</span><span class="nx">linePtX1</span><span class="p">,</span> <span class="nx">linePtY1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+<span class="ln">28</span>	<span class="p">}</span>
+<span class="ln">29</span>
+<span class="ln">30</span>	<span class="nx">d</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">linePtY2</span><span class="o">*</span><span class="nx">x</span><span class="o">-</span><span class="nx">linePtY1</span><span class="o">*</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">linePtX1</span><span class="o">*</span><span class="nx">y</span><span class="o">-</span><span class="nx">linePtX2</span><span class="o">*</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">linePtX2</span><span class="o">*</span><span class="nx">linePtY1</span><span class="o">-</span><span class="nx">linePtX1</span><span class="o">*</span><span class="nx">linePtY2</span><span class="p">)</span> <span class="o">/</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Sqrt</span><span class="p">((</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtY2</span><span class="o">-</span><span class="nx">linePtY1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nx">linePtX2</span><span class="o">-</span><span class="nx">linePtX1</span><span class="p">))</span>
+<span class="ln">31</span>	<span class="k">return</span> <span class="nx">math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="ln">32</span><span class="p">}</span>
+<span class="ln">33</span>
+<span class="ln">34</span><span class="c1">//道格拉斯抽稀算法
+</span><span class="ln">35</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">(</span><span class="nx">vecPtRes</span> <span class="p">[]</span><span class="nx">Point</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">36</span>	<span class="nx">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">)</span>
+<span class="ln">37</span>	<span class="k">if</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="p">{</span>			<span class="c1">//小于两个点直接返回
+</span><span class="ln">38</span><span class="c1"></span>		<span class="k">return</span> <span class="nx">vecPt</span>
+<span class="ln">39</span>	<span class="p">}</span>
+<span class="ln">40</span>
+<span class="ln">41</span>
+<span class="ln">42</span>	<span class="c1">//用于标记哪些点需要保留
+</span><span class="ln">43</span><span class="c1"></span>	<span class="nx">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
+<span class="ln">44</span>
+<span class="ln">45</span>	<span class="c1">//两端点必保留
+</span><span class="ln">46</span><span class="c1"></span>	<span class="nx">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">47</span>	<span class="nx">m</span><span class="p">[</span><span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">48</span>	<span class="nf">douglas</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">vecPt</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">m</span><span class="p">)</span>
+<span class="ln">49</span>
+<span class="ln">50</span>	<span class="c1">//返回数据
+</span><span class="ln">51</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">vecPt</span> <span class="p">{</span>
+<span class="ln">52</span>		<span class="k">if</span> <span class="nx">m</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">{</span>
+<span class="ln">53</span>			<span class="nx">vecPtRes</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">vecPtRes</span><span class="p">,</span> <span class="nx">pt</span><span class="p">)</span>
+<span class="ln">54</span>		<span class="p">}</span>
+<span class="ln">55</span>	<span class="p">}</span>
+<span class="ln">56</span>	<span class="k">return</span>
+<span class="ln">57</span><span class="p">}</span>
+<span class="ln">58</span>
+<span class="ln">59</span><span class="kd">func</span> <span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span> <span class="o">*</span><span class="p">[]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">r</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">tolerance</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">m</span> <span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">60</span>	<span class="k">if</span> <span class="nx">r</span> <span class="o">-</span> <span class="nx">l</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+<span class="ln">61</span>		<span class="k">return</span>
+<span class="ln">62</span>	<span class="p">}</span>
+<span class="ln">63</span>
+<span class="ln">64</span>	<span class="c1">//取两个端点的数据
+</span><span class="ln">65</span><span class="c1"></span>	<span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">l</span><span class="p">])</span>
+<span class="ln">66</span>	<span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">r</span><span class="p">])</span>
+<span class="ln">67</span>
+<span class="ln">68</span>	<span class="kd">var</span> <span class="nx">maxDist</span> <span class="kt">float64</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>		<span class="c1">//记录最大距离
+</span><span class="ln">69</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">keepIndex</span> <span class="kt">int</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span>			<span class="c1">//记录要保留的点的index
+</span><span class="ln">70</span><span class="c1"></span>
+<span class="ln">71</span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="nx">l</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">r</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+<span class="ln">72</span>		<span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:=</span> <span class="nf">pt2float</span><span class="p">((</span><span class="o">*</span><span class="nx">vecPt</span><span class="p">)[</span><span class="nx">i</span><span class="p">])</span>
+<span class="ln">73</span>		<span class="nx">d</span> <span class="o">:=</span> <span class="nf">GetDistPt2Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+<span class="ln">74</span>
+<span class="ln">75</span>		<span class="k">if</span> <span class="nx">d</span> <span class="p">&gt;</span> <span class="nx">maxDist</span> <span class="p">{</span>
+<span class="ln">76</span>			<span class="nx">maxDist</span> <span class="p">=</span> <span class="nx">d</span>
+<span class="ln">77</span>			<span class="nx">keepIndex</span> <span class="p">=</span> <span class="nx">i</span>
+<span class="ln">78</span>		<span class="p">}</span>
+<span class="ln">79</span>	<span class="p">}</span>
+<span class="ln">80</span>
+<span class="ln">81</span>	<span class="k">if</span> <span class="nx">maxDist</span> <span class="p">&gt;</span> <span class="nx">tolerance</span> <span class="p">{</span>
+<span class="ln">82</span>		<span class="p">(</span><span class="o">*</span><span class="nx">m</span><span class="p">)[</span><span class="nx">keepIndex</span><span class="p">]</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">83</span>		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+<span class="ln">84</span>		<span class="nf">douglas</span><span class="p">(</span><span class="nx">vecPt</span><span class="p">,</span> <span class="nx">keepIndex</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">tolerance</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span>
+<span class="ln">85</span>	<span class="p">}</span>
+<span class="ln">86</span><span class="p">}</span>
+<span class="ln">87</span>
+<span class="ln">88</span><span class="kd">func</span> <span class="nf">pt2float</span><span class="p">(</span><span class="nx">pt</span> <span class="nx">Point</span><span class="p">)</span> <span class="p">(</span><span class="kt">float64</span><span class="p">,</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">89</span>	<span class="k">return</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">X</span><span class="p">,</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">Y</span>
+<span class="ln">90</span><span class="p">}</span>
+<span class="ln">91</span>
+</code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -350,19 +251,13 @@
                             <a class="link-to-markdown" href="/go-douglas-algorithm/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/go-douglas-algorithm/" data-title="道格拉斯算法-go语言实现"><i class="fab fa-weibo fa-fw"></i>
-</a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="/go-douglas-algorithm/" data-title="道格拉斯算法-go语言实现"><i class="fab fa-evernote fa-fw"></i>
-</a></span>
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/go-douglas-algorithm/" data-title="道格拉斯算法-go语言实现"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section><span>
-                        <a href="/tags/golang">
-                            <i class="fas fa-tag fa-fw"></i>golang
-                        </a>
-                    </span>&nbsp;</section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang">golang</a></section>
         <section>
             <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -371,16 +266,33 @@
     <div class="post-nav">
             <a href="/an-anti-intuitive-feature-of-golang-deserialization/" class="next" rel="next" title="golang json和gob包反序列化一个反直觉的特点">golang json和gob包反序列化一个反直觉的特点<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-<div class="comment"></div>
-    </article></div>
+</article></div>
             </main><footer class="footer">
-    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.0"><i class="far fa-heart fa-fw"></i> LoveIt</a>
         </div>
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">太古汤</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
-</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <span>&nbsp;</span>
-        </a><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.54590077ee163035c3dd38dc034e9f6915ecbe680dd832f449afa21672cab116.js" integrity="sha256-VFkAd&#43;4WMDXD3TjcA06faRXsvmgN2DL0Sa&#43;iFnLKsRY="></script><script src="/lib/sharer/sharer.min.9c88f86c7f0820287113f6236200459832693656e80d7556cc80a93dfbd45813.js" integrity="sha256-nIj4bH8IIChxE/YjYgBFmDJpNlboDXVWzICpPfvUWBM="></script><script src="/js/theme.min.1482fc67bfa2c3b8cebe476d0037b9321b5b7a8a1525b547b94143948be90e9e.js" integrity="sha256-FIL8Z7&#43;iw7jOvkdtADe5MhtbeooVJbVHuUFDlIvpDp4="></script></body>
+</div>
+
+        <div id="fixed-buttons" class="animated faster"><a href="#" id="top-button" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="comment-button" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+                actualSize: false,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
 </html>
