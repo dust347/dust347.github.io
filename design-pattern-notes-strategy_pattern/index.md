@@ -11,7 +11,7 @@ uml图大概是这个样子：
 ![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png) 
 -->
 
-<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/strategy-patterm.png" width = "240" align=center />
+<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy-pattern/strategy-patterm.png" width = "240" align=center />
 
 <!--
 ``` plantuml
@@ -43,7 +43,7 @@ StrategyA, StrategyB 实现了具体的算法(分别封装起来)
 <!--
 ![](https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png)
 -->
-<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy_pattern/other.png" width = "300" align=center />
+<img src="https://raw.githubusercontent.com/dust347/blog_image/master/design-pattern-notes-strategy-pattern/other.png" width = "300" align=center />
 
 <!--
 ``` plantuml
