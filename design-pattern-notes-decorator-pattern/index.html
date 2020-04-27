@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>设计模式笔记-装饰者模式 | 太古汤</title>
+        <meta name="Description" content="About LoveIt Theme"><meta property="og:title" content="设计模式笔记-装饰者模式" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/design-pattern-notes-decorator-pattern/" />
+<meta property="article:published_time" content="2020-04-26T22:26:30+08:00" />
+<meta property="article:modified_time" content="2020-04-26T22:26:30+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="设计模式笔记-装饰者模式"/>
+<meta name="twitter:description" content=""/>
+<meta name="generator" content="Hugo 0.69.1" /><meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="/design-pattern-notes-decorator-pattern/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="/design-pattern-notes-observer-pattern/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "设计模式笔记-装饰者模式",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/design-pattern-notes-decorator-pattern\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "设计模式","wordcount":  206 ,
+        "url": "\/design-pattern-notes-decorator-pattern\/","datePublished": "2020-04-26","dateModified": "2020-04-26","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "太古汤"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">太古汤</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" rel="noopener noreffer">About</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">太古汤</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">Posts</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">Tags</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">Categories</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">设计模式笔记-装饰者模式</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>太古汤</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">
+                                <i class="far fa-folder fa-fw"></i>设计模式
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-04-26>2020-04-26</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 206 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>1 min&nbsp;<span id="/design-pattern-notes-decorator-pattern/" class="leancloud_visitors" data-flag-title="设计模式笔记-装饰者模式">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
+        </div><div class="toc" id="toc-auto">
+                <h2 class="toc-title">Contents</h2>
+                <div class="toc-content" id="toc-content-auto"></div>
+            </div>
+            <div class="toc" id="toc-static">
+                <details>
+                    <summary>
+                        <div class="toc-title">
+                            <span>Contents</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
+                    <div class="toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是装饰者模式">什么是装饰者模式</a></li>
+    <li><a href="#类图">类图</a></li>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#代码实现">代码实现</a></li>
+  </ul>
+</nav></div>
+                </details>
+            </div><div class="content" id="content"><h2 id="什么是装饰者模式">什么是装饰者模式</h2>
+<p>也叫修饰模式，通过增加一个<strong>修饰类</strong>包裹原来的类的方式，来达到<strong>在运行时扩充一个类的功能</strong>。</p>
+<ul>
+<li>修饰类要与原来的类有相同的接口。</li>
+<li>包裹方式一般是要包裹的类是修饰类的私有成员变量。</li>
+<li>如果不需要新功能，直接调用原来的类的接口。</li>
+<li>新功能一般通过调用原来的类的函数，再加上修饰类的额外逻辑。</li>
+</ul>
+<h2 id="类图">类图</h2>
+<p><img src="https://github.com/dust347/blog_image/blob/master/design-pattern-notes-decorator-pattern/decorator-pattern.png?raw=true" width = "350" align=center /></p>
+<!--
+```plantuml
+@startuml
+interface Component {
++ peration()
+}
+
+class ConcreteComponent {
++ opration()
+}
+
+class Decorator {
+- Component component
++ opration()
+}
+
+class ConcreteDecorator {
++ opration()
+}
+
+Component <|.. ConcreteComponent
+Component <|.. Decorator
+
+Decorator <|-- ConcreteDecorator
+
+Decorator *-- Component
+@enduml
+```
+-->
+<h2 id="说明">说明</h2>
+<ul>
+<li>Component 是修饰类，和原来的类要实现的接口。（是一个基类也可以）</li>
+<li>ConcreteComponent 是Component 的一个具体的类，可以理解为是要被包裹的，原来的函数。</li>
+<li>Decorator 是修饰类，里面的私有成员变量 component 是要被包裹的类，由于 Decorator 同样实现 Component 接口，Decorator 同样可以被包裹。</li>
+<li>ConcreteDecorator 是一个具体的 Decorator 一般来说，可以是“修饰行为”不同的一个修饰类。这里“修饰行为”可以认为是，Decorator 调用自身 component 的 opration 函数时额外执行的操作。</li>
+</ul>
+<p>相对于使用继承的方式，修饰者模式使用<strong>组合</strong>，可以在动态的添加新的行为，不需要增加子类，更加灵活。</p>
+<p>对于一些场景，比如奶茶店，同样的奶茶，可能有半糖，少糖；加冰，常温这种不同的选项，使用组合的方式是更加合理的，否则需要针对不同的定义不同的子类，而这种场景无法穷尽这些场景。</p>
+<p>在上面奶茶的 case 下，我们认为不同的奶茶（原味，红豆奶茶）认为是要包裹的类，将类似半糖少糖的逻辑定义在修饰类，通过层层包裹实现不同的功能（不同类型的奶茶）。</p>
+<blockquote>
+<p>golang 没有继承，所谓的继承实际上就是将“基类”作为自己的成员变量，调用接口的时候，直接调用“基类”的接口实现。</p>
+</blockquote>
+<h2 id="代码实现">代码实现</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln"> 1</span><span class="kn">package</span> <span class="nx">designpattern</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="c1">//Component 装饰者要实现的接口
+</span><span class="ln"> 4</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Component</span> <span class="kd">interface</span> <span class="p">{</span>
+<span class="ln"> 5</span>	<span class="nf">Operation</span><span class="p">()</span> <span class="kt">string</span>
+<span class="ln"> 6</span><span class="p">}</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="c1">//ConcreteComponent 一个具体的 Component 不是装饰者
+</span><span class="ln"> 9</span><span class="c1"></span><span class="kd">type</span> <span class="nx">ConcreteComponent</span> <span class="kd">struct</span> <span class="p">{</span>
+<span class="ln">10</span><span class="p">}</span>
+<span class="ln">11</span>
+<span class="ln">12</span><span class="c1">//Operation ConcreteComponent 的函数
+</span><span class="ln">13</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">ConcreteComponent</span><span class="p">)</span> <span class="nf">Operation</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="ln">14</span>	<span class="k">return</span> <span class="s">&#34;面条&#34;</span>
+<span class="ln">15</span><span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span><span class="c1">//Decorator 装饰者
+</span><span class="ln">18</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Decorator</span> <span class="kd">struct</span> <span class="p">{</span>
+<span class="ln">19</span>	<span class="nx">c</span> <span class="nx">Component</span> <span class="c1">//要包裹的类
+</span><span class="ln">20</span><span class="c1"></span><span class="p">}</span>
+<span class="ln">21</span>
+<span class="ln">22</span><span class="c1">//NewDecorator 生成 Decorator 实例
+</span><span class="ln">23</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewDecorator</span><span class="p">(</span><span class="nx">c</span> <span class="nx">Component</span><span class="p">)</span> <span class="o">*</span><span class="nx">Decorator</span> <span class="p">{</span>
+<span class="ln">24</span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Decorator</span><span class="p">{</span>
+<span class="ln">25</span>		<span class="nx">c</span><span class="p">:</span> <span class="nx">c</span><span class="p">,</span>
+<span class="ln">26</span>	<span class="p">}</span>
+<span class="ln">27</span><span class="p">}</span>
+<span class="ln">28</span>
+<span class="ln">29</span><span class="c1">//Operation 装饰者实现
+</span><span class="ln">30</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decorator</span><span class="p">)</span> <span class="nf">Operation</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="ln">31</span>	<span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">c</span><span class="p">.</span><span class="nf">Operation</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;加个鸡蛋&#34;</span>
+<span class="ln">32</span><span class="p">}</span>
+<span class="ln">33</span>
+<span class="ln">34</span><span class="c1">//Decorator2 另一个装饰者
+</span><span class="ln">35</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Decorator2</span> <span class="kd">struct</span> <span class="p">{</span>
+<span class="ln">36</span>	<span class="nx">c</span> <span class="nx">Component</span> <span class="c1">//要包裹的类
+</span><span class="ln">37</span><span class="c1"></span><span class="p">}</span>
+<span class="ln">38</span>
+<span class="ln">39</span><span class="c1">//NewDecorator2 生成 Decorator2 实例
+</span><span class="ln">40</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewDecorator2</span><span class="p">(</span><span class="nx">c</span> <span class="nx">Component</span><span class="p">)</span> <span class="o">*</span><span class="nx">Decorator2</span> <span class="p">{</span>
+<span class="ln">41</span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Decorator2</span><span class="p">{</span>
+<span class="ln">42</span>		<span class="nx">c</span><span class="p">:</span> <span class="nx">c</span><span class="p">,</span>
+<span class="ln">43</span>	<span class="p">}</span>
+<span class="ln">44</span><span class="p">}</span>
+<span class="ln">45</span>
+<span class="ln">46</span><span class="c1">//Operation 装饰者实现
+</span><span class="ln">47</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decorator2</span><span class="p">)</span> <span class="nf">Operation</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+<span class="ln">48</span>	<span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">c</span><span class="p">.</span><span class="nf">Operation</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;加个鸡腿&#34;</span>
+<span class="ln">49</span><span class="p">}</span>
+</code></pre></div><p>测试代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="ln">1</span><span class="kd">func</span> <span class="nf">TestDecorator</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">2</span>	<span class="nx">d</span> <span class="o">:=</span> <span class="nx">designpattern</span><span class="p">.</span><span class="nf">NewDecorator</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">designpattern</span><span class="p">.</span><span class="nx">ConcreteComponent</span><span class="p">{})</span>
+<span class="ln">3</span>
+<span class="ln">4</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nf">Operation</span><span class="p">())</span>
+<span class="ln">5</span>
+<span class="ln">6</span>	<span class="nx">d2</span> <span class="o">:=</span> <span class="nx">designpattern</span><span class="p">.</span><span class="nf">NewDecorator2</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="ln">7</span>
+<span class="ln">8</span>	<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">d2</span><span class="p">.</span><span class="nf">Operation</span><span class="p">())</span>
+<span class="ln">9</span><span class="p">}</span>
+</code></pre></div><p>测试结果：</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>=== RUN   TestDecorator
+<span class="ln">2</span>    TestDecorator: pattern_test.go:48: 面条加个鸡蛋
+<span class="ln">3</span>    TestDecorator: pattern_test.go:52: 面条加个鸡蛋加个鸡腿
+<span class="ln">4</span>--- PASS: TestDecorator (0.00s)
+<span class="ln">5</span>PASS
+</code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-04-26</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/design-pattern-notes-decorator-pattern/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/design-pattern-notes-decorator-pattern/" data-title="设计模式笔记-装饰者模式"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/design-pattern-notes-observer-pattern/" class="prev" rel="prev" title="设计模式笔记-观察者模式"><i class="fas fa-angle-left fa-fw"></i>设计模式笔记-观察者模式</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.0"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+</div>
+
+        <div id="fixed-buttons" class="animated faster"><a href="#" id="top-button" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="comment-button" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+                actualSize: false,
+            });
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },],
+                strict: false,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/lib/katex/katex.min.js"></script><script src="/lib/katex/auto-render.min.js"></script><script src="/lib/katex/copy-tex.min.js"></script><script src="/lib/katex/mhchem.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>
