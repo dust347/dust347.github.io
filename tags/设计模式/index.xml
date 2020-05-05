@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 26 Apr 2020 22:26:30 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2020 23:03:21 +0800</lastBuildDate>
     
 	<atom:link href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>设计模式笔记-工厂模式</title>
+      <link>/design-pattern-notes-factory-pattern/</link>
+      <pubDate>Tue, 05 May 2020 23:03:21 +0800</pubDate>
+      
+      <guid>/design-pattern-notes-factory-pattern/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>设计模式笔记-装饰者模式</title>
