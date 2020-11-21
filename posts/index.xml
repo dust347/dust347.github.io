@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 31 May 2020 16:05:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2020 21:13:03 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在 Go 中创建自定义错误</title>
+      <link>/create-custom-error-in-go/</link>
+      <pubDate>Sat, 21 Nov 2020 21:13:03 +0800</pubDate>
+      
+      <guid>/create-custom-error-in-go/</guid>
+      <description>&lt;p&gt;Go 语言使用 error 来表示错误。在开发过程中，错误处理基本上是判断所调用的函数所返回的 error 是否为空，如果不为空进行必要的处理。&lt;/p&gt;
+&lt;p&gt;但是在一些复杂的业务场景中，仅知道是否有错误是不够的，还需要知道具体的错误类型。这种时候标准库提供的 error 功能就太过简单。这时可以实现自定义的 error 解决。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>设计模式笔记-命令模式</title>
